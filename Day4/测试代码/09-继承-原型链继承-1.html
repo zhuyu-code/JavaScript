@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>05-继承-原型链继承-1</title>
+</head>
+<body>
+
+<script>
+
+    /**
+     * 构造函数Person
+     */
+    function Person() {
+        this.name = '撩课学院';
+        this.pets = ['小煤球', 'Python'];
+    }
+    Person.prototype.run = function () {
+        console.log('跑');
+    };
+
+    /**
+     * 构造函数Student
+     */
+    function Stu() {
+        this.num = 'itlike.com';
+    }
+
+
+    // 让Stu的原型对象指向Person的原型对象
+    Stu.prototype = Person.prototype;
+
+    var stu = new Stu();
+    console.log(stu);
+    console.log(stu.num);
+    stu.run();
+
+    // 无法访问到父类的对象属性?
+    console.log(stu.name);
+    console.log(stu.pets);
+
+
+
+</script>
+
+
+</body>
+</html>

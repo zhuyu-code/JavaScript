@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>09-面向对象-访问函数原型对象的方式</title>
+</head>
+<body>
+
+<!--
+访问函数原型对象的方式
+__proto__ 属于非标准属性,
+ECMAScript中不包含该属性, 仅仅是浏览器为了方便我们调试用的
+所以:
+    正式发布代码的时候, 不要出现这个
+-->
+
+<script>
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    Person.prototype.run = function () {
+        console.log('跑');
+    };
+
+    // 方式一
+    console.log(Person.prototype);
+
+    // 方式二
+    var p = new Person();
+    console.log(p.__proto__);
+
+
+    // 能否修改对象的 __proto__ ?
+    var newYX = {
+        'add': function () {
+            console.log('sum');
+        }
+    };
+
+    // 事实证明, 可以修改
+    p.__proto__ = newYX;
+    console.log(p.__proto__);
+
+</script>
+</body>
+</html>

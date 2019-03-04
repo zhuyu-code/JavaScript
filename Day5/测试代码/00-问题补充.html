@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    // 找一找apply和call
+    console.log(new Object());
+    /*
+      call, apply:
+      小偷, 自己没有但别人有, 偷过来用一用(借) 
+    */
+     var demo1 = {
+         name: '老实人',
+         showName: function (params1, params2) {
+             console.log(this.name, params1, params2);
+         }
+     };
+
+     var demo2 = {
+         name: '小偷'
+     };
+
+    // demo1.showName();
+    // demo1.showName.call(demo2); // demo1.showName函数内部的this同时指向了demo2
+
+    demo1.showName('农夫', '老师');
+    demo1.showName.call(demo2, '采花大盗', '怪侠一枝梅');
+    demo1.showName.apply(demo2, ['数组小偷1', '数组小偷2']);
+</script>
+
+<script>
+    function Person() {
+        this.name = '张三';
+        this.age = 18
+    }
+
+
+    function Student() {
+
+        Person.call(this);
+
+        this.sex = '男';
+    }
+
+    var s = new Student();
+    console.log(s);
+</script>
+</body>
+</html>

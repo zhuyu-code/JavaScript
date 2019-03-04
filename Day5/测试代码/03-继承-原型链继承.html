@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>05-继承-原型链继承-1</title>
+</head>
+<body>
+
+<script>
+
+    function Person(name, pets) {
+        this.name = name;
+        this.pets = pets;
+    }
+
+    Person.prototype.run = function () {
+        console.log('跑');
+    };
+
+    function Stu(num, name, pets) {
+        // 以后, 这么写, 要把父类型的构造函数调用, 写在最上面
+        Person.call(this, name, pets);
+        this.num = num;
+    }
+
+    var p = new Person();
+    Stu.prototype = p;
+    Stu.prototype.constructor = Stu;
+
+</script>
+<script>
+    var stu = new Stu('001', 'sz', ['小花']);
+    console.log(stu);
+
+    var stu2 = new Stu('002','王二小', ['土豆']);
+    console.log(stu2);
+</script>
+</body>
+</html>

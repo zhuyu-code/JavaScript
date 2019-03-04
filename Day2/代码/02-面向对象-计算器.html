@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script type="text/html">
+    function jia(a, b) {
+        return a + b;
+    }
+
+    function jian(a, b) {
+        return a - b;
+    }
+
+    function cheng(a, b) {
+        return a * b;
+    }
+
+    function  chu(a, b) {
+        return a / b;
+    }
+
+    // (6 + 6) * 2 / 3 - 4
+    console.log(jian(chu(cheng(jia(6, 6), 2), 3), 4));
+
+</script>
+<script type="text/html">
+    var Caculator = {
+        // 结果
+        result: 0,
+        // 行为
+        jia: function (num) {
+            this.result += num;
+        },
+        jian: function(num) {
+            this.result -= num;
+        },
+        cheng: function (num) {
+            this.result *= num;
+        },
+        chu: function (num) {
+            this.result /= num;
+        },
+        log: function () {
+            console.log(this.result)
+        }
+    };
+    // (6 + 6) * 2 / 3 - 4
+    Caculator.jia(6);
+    Caculator.jia(6);
+    Caculator.cheng(2);
+    Caculator.chu(3);
+    Caculator.jian(4);
+    Caculator.log();
+</script>
+<script>
+    var Caculator = {
+        // 结果
+        result: 0,
+        // 行为
+        jia: function (num) {
+            this.result += num;
+            return this;
+        },
+        jian: function(num) {
+            this.result -= num;
+            return this;
+        },
+        cheng: function (num) {
+            this.result *= num;
+            return this;
+        },
+        chu: function (num) {
+            this.result /= num;
+            return this;
+        },
+        log: function () {
+            console.log(this.result);
+            return this;
+        },
+        clean: function () {
+            this.result = 0;
+            return this;
+        }
+    };
+
+    // (6 + 6) * 2 / 3 - 4
+    Caculator.jia(6).jia(6).cheng(2).chu(3).jian(4).log();
+   Caculator.clean().jia(2).log();
+</script>
+</body>
+</html>

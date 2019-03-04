@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script type="text/html">
+    var name1 = '张三';
+    var name2 = '李四';
+    var age1 = 18;
+    var age2 = 28;
+    var address1 = '上海';
+    var address2 = '北京';
+
+    console.log(name1);
+    console.log(name2);
+    console.log(name3);
+
+    var p1 = {
+        name: '张三',
+        age: 18,
+        address: '上海'
+    };
+
+    var p2 = {
+        name: '李四',
+        age: 28,
+        address: '北京'
+    }
+</script>
+<script type="text/html">
+    var p1 = {
+        name: '张三',
+        age: 18,
+        address: '上海'
+    };
+    var p2 = {};
+
+    // 继承: 继承资源
+    for(var key in p1){
+        p2[key] = p1[key];
+    }
+
+    console.log(p2);
+</script>
+<script type="text/html">
+    var obj = {name: '张三'};
+    console.log(obj.toString()); // [object Object]
+
+    var arr = [1, 2, 3];
+    console.log(arr.toString()); // 1,2,3
+
+    // swift
+    // var i = 1; // Int
+    // var f = 1.1; // float
+    // i+f
+
+
+    var i = 1; // Int
+    var f = 1.1; // float
+    console.log(i + f);
+
+</script>
+</body>
+</html>

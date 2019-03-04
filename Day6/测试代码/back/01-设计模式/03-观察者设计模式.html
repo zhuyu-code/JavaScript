@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>03-观察者设计模式</title>
+</head>
+<body>
+
+
+<script type="text/html">
+
+    // 信息发布者
+    var seemygo = {
+        tasks: [],
+        addStu: function (func) {
+            this.tasks.push(func);
+        },
+        removeStu: function (func) {
+            console.log('待完成');
+        },
+        publishMsg: function () {
+            for (var i = 0, len = this.tasks.length; i<len; i++) {
+                var func = this.tasks[i];
+                func();
+            }
+        }
+
+    }
+
+    var stu1 = {name:'王二小', noup: function () {
+        console.log('王二小不上了');
+    }}
+
+    var stu2 = {name:'sz', baoming: function () {
+        console.log('sz报名了');
+    }}
+
+
+    seemygo.addStu(stu1.noup);
+    seemygo.addStu(stu2.baoming);
+
+    seemygo.publishMsg();
+
+
+</script>
+
+
+<!--
+
+-->
+<script type="text/html">
+
+    // 信息发布者
+    var seemygo = {
+        tasks: [],
+        addTargetAction: function (target, action) {
+            var task = {target: target, action: action};
+            this.tasks.push(task);
+        },
+        removeStu: function (target, action) {
+            console.log('待完成');
+        },
+        publishMsg: function () {
+            for (var i = 0, len = this.tasks.length; i<len; i++) {
+                var task = this.tasks[i];
+                task['action'].call(task['target']);
+            }
+        }
+
+    }
+
+    var stu1 = {name:'王二小', noup: function () {
+        console.log(this.name, '不上了');
+    }}
+
+    var stu2 = {name:'sz', baoming: function () {
+        console.log(this.name, '报名了');
+    }}
+
+
+    seemygo.addTargetAction(stu1, stu1.noup);
+    seemygo.addTargetAction(stu2, stu2.baoming);
+
+    seemygo.publishMsg();
+
+
+</script>
+
+
+<!--
+按消息分类
+-->
+<script type="text/html">
+
+    // 信息发布者
+    var seemygo = {
+        totalTypeTasks: {},
+        addTypeTargetAction: function (type, target, action) {
+
+            if (typeof this.totalTypeTasks[type] == 'undefined') {
+                this.totalTypeTasks[type] = [];
+            }
+            this.totalTypeTasks[type].push({target: target, action: action});
+        },
+        publishMsg: function (type, content) {
+
+            var tasks = this.totalTypeTasks[type];
+            for (var i = 0, len = tasks.length; i<len; i++) {
+                var task = tasks[i];
+                task['action'].call(task['target'], content);
+            }
+        }
+
+    }
+
+    var stu1 = {name:'王二小', noup: function (content) {
+        console.log('收到通知', content, this.name, '不上了');
+    }}
+
+    var stu2 = {name:'sz', baoming: function (content) {
+        console.log('收到通知', this.name, '报名了');
+    }}
+
+    seemygo.addTypeTargetAction('h5', stu1, stu1.noup);
+    seemygo.addTypeTargetAction('h5', stu2, stu1.noup);
+    seemygo.addTypeTargetAction('iOS', stu2, stu2.baoming);
+
+    seemygo.publishMsg('h5', 'h5开班了, 学费99');
+
+
+</script>
+
+<script>
+
+    // 信息发布者
+    function Publisher() {
+        this.totalTypeTasks = {};
+    }
+    Publisher.prototype = {
+        constructor: Publisher,
+        addTypeTargetAction: function (type, target, action) {
+
+            if (typeof this.totalTypeTasks[type] == 'undefined') {
+                this.totalTypeTasks[type] = [];
+            }
+            this.totalTypeTasks[type].push({target: target, action: action});
+        },
+        removeType: function (type) {
+            delete this.totalTypeTasks[type];
+        },
+        removeTarget: function (target) {
+           for (var key in this.totalTypeTasks) {
+               var tasks = this.totalTypeTasks[key];
+               var deleteIndexes = [];
+               for (var i = 0, len = tasks.length; i<len; i++) {
+                   var task = tasks[i];
+                   if (task.target == target) {
+                       deleteIndexes.push(i);
+                   }
+               }
+
+               // 从数组中删除元素
+               deleteIndexes.forEach(function (value) {
+                   tasks.splice(value, 1);
+               })
+           }
+            console.log(this.totalTypeTasks);
+        },
+        removeTypeTarget: function (type, target) {
+                var tasks = this.totalTypeTasks[type] || [];
+                var deleteIndexes = [];
+                for (var i = 0, len = tasks.length; i<len; i++) {
+                    var task = tasks[i];
+                    if (task.target == target) {
+                        deleteIndexes.push(i);
+                    }
+                }
+
+                // 从数组中删除元素
+                deleteIndexes.forEach(function (value) {
+                    tasks.splice(value, 1);
+                })
+
+            console.log(this.totalTypeTasks);
+        },
+        publishMsg: function (type, content) {
+            var tasks = this.totalTypeTasks[type] || [];
+            for (var i = 0, len = tasks.length; i<len; i++) {
+                var task = tasks[i];
+                task['action'].call(task['target'], content);
+            }
+        }
+
+    }
+
+
+    var seemygo = new Publisher();
+
+    var stu1 = {name:'王二小', noup: function (content) {
+        console.log('收到通知', content, this.name, '不上了');
+    }}
+
+    var stu2 = {name:'sz', baoming: function (content) {
+        console.log('收到通知',content, this.name, '报名了');
+    }}
+
+    seemygo.addTypeTargetAction('h5', stu2, stu1.noup);
+    seemygo.addTypeTargetAction('h5', stu1, stu1.noup);
+
+    seemygo.addTypeTargetAction('iOS', stu2, stu2.baoming);
+
+//    seemygo.removeType('h5');
+//    seemygo.removeTarget(stu1);
+//    seemygo.removeTypeTarget('h5', stu2);
+
+    seemygo.publishMsg('h5', 'h5开班了, 学费99');
+    seemygo.publishMsg('iOS', '开班了, 学费9.9');
+
+
+</script>
+
+</body>
+</html>

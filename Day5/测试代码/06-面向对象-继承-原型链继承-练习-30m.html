@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!-- 实现 Person, 对Animal的继承-->
+
+<!--
+描述Animal
+-->
+<script>
+    function Animal(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    Animal.prototype.eat = function () {
+        console.log('吃');
+    };
+    Animal.prototype.run = function () {
+        console.log('跑');
+    }
+
+</script>
+
+<!--
+描述Person
+-->
+<script>
+    function Person(job, name, age) {
+        // 1. 继承父类型的实例属性
+        Animal.call(this, name, age);
+        this.job = job;
+    }
+
+    // 2. 继承父类型的原型对象属性
+    function Tmp() {}
+    Tmp.prototype = Animal.prototype;
+    var personPrototype = new Tmp();
+    //  修改构造函数指向
+    personPrototype.constructor = Person;
+
+    // 3. 修改Person, 的原型对象指向
+    Person.prototype = personPrototype;
+
+    // 注意注意注意, 你改了指向, 之前原型对象上的东西??????
+    Person.prototype.jump = function () {
+        console.log('跳');
+    }
+
+//     此处切记: 一定要在修改Person原型对象的指向之后, 再添加东西
+
+
+
+</script>
+
+<!--
+验证Person实例, 是否拥有, name, age, job, eat, run
+-->
+<script>
+    var p = new Person('讲师', '叶建华', 18);
+    console.log(p);
+    p.run();
+    p.eat();
+    p.jump();
+</script>
+
+
+
+
+<!--
+描述Student
+-->
+<script>
+
+    function Student(className) {
+        this.className = className;
+    }
+    Student.prototype.study = function () {
+        console.log('学习');
+    }
+
+</script>
+
+
+
+
+
+
+
+
+</body>
+</html>

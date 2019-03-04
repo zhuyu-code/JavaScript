@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>07-面向对象扩展-Array.prototype</title>
+</head>
+<body>
+
+
+<!--
+concat()
+-->
+<script type="text/html">
+    var arr = [1,2,3];
+    var arr2 = ['a', 'b','c'];
+    var result = arr.concat(arr2, ['呵呵'], ['222'], 666);
+    console.log(result);
+
+</script>
+
+<!--
+copyWithin()
+-->
+<script type="text/html">
+
+    var arr = [1,2,3,4];
+//    console.log(arr.copyWithin(0,1,2)); // 223
+//    console.log(arr.copyWithin(0,1,3)); // 233
+    console.log(arr.copyWithin(0,1,-1)); // 2334
+
+    console.log(arr);
+
+</script>
+
+<!--
+entries()
+一个新的Array迭代器对象。
+-->
+<script type="text/html">
+
+    var a = ['a', 'b', 'c'];
+    var iterator = a.entries();
+    console.log(iterator);
+    for (var e of iterator) {
+        console.log(e);
+    }
+
+
+
+</script>
+
+
+<!--
+every()
+-->
+<script type="text/html">
+    var arr = [4,5,6];
+    function isBigTan3(value,index, arr) {
+        console.log(arguments);
+        console.log(this);
+        return value > 3;
+    }
+    var result = arr.every(isBigTan3, 'xxx');
+    console.log(result);
+
+
+</script>
+
+<script type="text/html">
+
+    var arr = [1,2,3, 4,5,6];
+    function isBigTan3(value,index, arr) {
+//        console.log(arguments);
+//        console.log(this);
+        return value > 3;
+    }
+    var result = arr.filter(isBigTan3, 'xxx');
+    console.log(result);
+    console.log(arr);
+
+</script>
+
+
+<script type="text/html">
+
+    var arr = [1,2,3, 4,5,6];
+    function isBigTan3(value,index, arr) {
+//        console.log(arguments);
+//        console.log(this);
+        return value > 3;
+    }
+    var result = arr.find(isBigTan3, 'xxx');
+    console.log(result);
+    console.log(arr);
+
+</script>
+
+<script type="text/html">
+
+    var arr = [1,2,3, 4,5,6];
+    function isBigTan3(value,index, arr) {
+        return value > 3;
+    }
+    var result = arr.findIndex(isBigTan3, 'xxx');
+    console.log(result);
+    console.log(arr);
+
+</script>
+
+<script>
+
+    var arr = [1,2,3,4,5,6];
+    function log(value,index, arr) {
+        console.log(value, index, arr, this);
+        return false;
+    }
+    arr.forEach(log, 'xxx');
+    console.log(arr);
+
+</script>
+
+
+</body>
+</html>

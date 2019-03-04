@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    /**
+     * 构造函数Person
+     * @constructor
+     */
+    function Person() {
+       this.name = '撩课学院';
+       this.pets = ['小煤球', 'Python'];
+    }
+
+    Person.prototype.run = function () {
+        console.log('跑');
+    };
+
+
+    /**
+     * 构造函数Student
+     * @constructor
+     */
+    function Student() {
+       this.num = 'itlike.com';
+    }
+
+    // 让Student的原型对象--->Person的原型对象
+    Student.prototype = Person.prototype;
+
+    var stu = new Student();
+    console.log(stu);
+    console.log(stu.num);
+    stu.run();
+/*
+    console.log(stu.name);
+    console.log(stu.pets);*/
+</script>
+</body>
+</html>

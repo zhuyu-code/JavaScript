@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>04-面向对象-构造函数注意事项2</title>
+</head>
+<body>
+
+<script>
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+        this.run = function () {
+            console.log(this.age + 'pao');
+        }
+    }
+
+   // 标准调用
+   /*
+   var p = new Person('sz', 18);
+    console.log(p);
+
+    var p = new Person();
+    console.log(p);
+
+    var p = new Person;
+    console.log(p);
+    */
+
+
+    // 问题调用
+   /*
+   var p = Person('sz', 666);
+   console.log(p);
+   */
+
+    // 实例方法调用
+    var p = new Person('sz', 18);
+    p.run();
+    var run = p.run;
+    run();
+
+</script>
+
+
+</body>
+</html>

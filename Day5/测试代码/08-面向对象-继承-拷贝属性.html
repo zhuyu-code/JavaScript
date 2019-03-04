@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>11-面向对象-继承-拷贝属性</title>
+</head>
+<body>
+
+<script>
+    var obj = {name: '撩课', age: 18};
+    var obj2 = {};
+
+    // 目标, 让obj2, 拥有obj内的所有属性
+    for (var key in obj) {
+        obj2[key] = obj[key];
+    }
+    console.log(obj2);
+</script>
+
+<script>
+    var obj3 = {class: '09'};
+    Object.assign(obj3, obj, {address: '上海'});
+    console.log(obj3);
+</script>
+
+<!--
+弊端
+	如果属性的值是引用类型的,那么子对象和父对象共享一块数据,修改了某个对象对另外一个对象有影响
+-->
+<script>
+
+    var p = {name: '张三', pets: ['小花', '小黑', '土豆']};
+    var copyP = {};
+
+    /*for (var key in p) {
+       copyP[key] = p[key];
+    }*/
+
+
+    // 默认情况下, 全部都是浅拷贝
+    Object.assign(copyP, p);
+    copyP.pets.push('马铃薯');
+
+    console.log(p);
+</script>
+
+
+</body>
+</html>

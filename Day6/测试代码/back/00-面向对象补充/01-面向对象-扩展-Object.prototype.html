@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>06-面向对象-扩展-Object.prototype</title>
+</head>
+<body>
+
+
+
+<!--
+01-hasOwnProperty()
+检测对象中是否存在某个实例属性 (不包括原型对象属性)
+-->
+<script type="text/html">
+
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    Person.prototype.address = '上海';
+    var p = new Person('sz', 18);
+    console.log(p.hasOwnProperty('name'));
+    console.log(p.hasOwnProperty('age'));
+    console.log(p.hasOwnProperty('address'));
+
+
+</script>
+
+<!--
+02-isPrototypeOf()
+判断某个对象是否是指定对象的原型对象(会判断整条原型链)
+-->
+<script type="text/html">
+
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    var p = new Person('sz', 18);
+
+    console.log(Person.prototype.isPrototypeOf(p));
+    console.log(Object.prototype.isPrototypeOf(p));
+
+
+</script>
+
+<!--
+03-propertyIsEnumerable()
+-->
+<script type="text/html">
+
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    var p = new Person('sz', 18);
+    console.log(Object.getOwnPropertyDescriptor(p,'name'));
+    console.log(p.propertyIsEnumerable('name'));
+
+    var arr = [1,2,3];
+    console.log(Object.getOwnPropertyDescriptor(arr,'length'));
+    console.log(arr.propertyIsEnumerable('length'));
+
+
+
+</script>
+
+<!--
+04-toString()
+-->
+<script type="text/html">
+/*
+    ① object类型的对象 返回的什么  [obejct Object]
+    ② 其他对象类型如函数 | 数组 ,返回对应的字符串形式
+    ③ Number类型 可以传递参数(进制) 不传递参数:默认是十进制
+*/
+
+    var obj = {name: 'sz'};
+    console.log(obj.toString());
+
+    var arr = [1,2,3];
+    console.log(arr.toString());
+
+    function sum() {
+    }
+    console.log(sum.toString());
+
+    var num = 18;
+    console.log(num.toString(2));
+
+
+</script>
+
+<!--
+05-valueOf()
+-->
+<script>
+
+    /*
+    *
+    *     ① 基本包装类型（String Number Boolean）,返回对应的基本类型的值
+    *     ② object类型的，返回this(该对象本身)
+    *     ③ date(日期类)，返回时间戳
+    * */
+    var num = new Number('2');
+    console.log(num.valueOf());
+
+    var obj = {name: 'sz'};
+    console.log(obj.valueOf());
+    console.log([1, 2, 3].valueOf());
+
+    var date = new Date();
+    console.log(date.valueOf());
+
+
+</script>
+
+
+<!--
+__defineGetter__
+__defineSetter__
+-->
+<script type="text/html">
+
+
+    function Stu(age, math, china) {
+        this.math = math;
+        this.china = china;
+        this.totalScore = 0;
+        this.age = age;
+    }
+
+    Stu.prototype.__defineGetter__('totalScore', function () {
+        return this.math + this.china;
+    });
+    Stu.prototype.__defineSetter__('setAge', function (age) {
+        if (age < 0 || age > 200) {
+            alert('年龄出错');
+            return;
+        }
+        this.age = age;
+
+    })
+
+    var s = new Stu(18, 10, 20);
+    s.setAge = 11;
+    console.log(s.totalScore);
+    console.log(s);
+
+</script>
+
+
+</body>
+</html>

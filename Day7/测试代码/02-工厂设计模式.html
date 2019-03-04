@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!--
+简单工厂模式: 给定原材料,加工出给定的产品
+-->
+<script type="text/html">
+    // 咖啡机
+    // 放入咖啡豆和水, 加工出不同比例的咖啡
+    function makeCoffee(dou, water) {
+        var obj = new Object();
+        obj.dou = dou;
+        obj.water = water;
+        obj.bili = dou / water;
+        return obj;
+    }
+
+    var coffee = makeCoffee(1, 10);
+    console.log('造出了纯度为', coffee.bili, '的咖啡');
+
+    var coffee2 = makeCoffee(2, 10);
+    console.log('造出了纯度为', coffee2.bili, '的咖啡');
+</script>
+
+<!--
+复杂工厂模式
+果汁厂(苹果汁, 橘子汁, 香蕉汁, ....)
+-->
+<script>
+    /**
+     *  果汁工厂
+     */
+    function FruitMaker() {}
+
+     /**
+      *  对外招商
+      * @param type 类型
+      * @param meta 材料
+      */
+    FruitMaker.prototype.make = function (type, meta) {
+        // 2.1 根据传入, 检测, 是否具备生产能力
+        if (typeof this[type] === 'function') {
+            // 2.2 如果具备, 则使用某条生产线, 开始生产产品
+            var func = this[type];
+            // 2.3 修改生产厂家(对外统一)
+            func.prototype = FruitMaker.prototype;
+            // 2.3 返回产品
+            return new func(meta);
+        }else {
+            throw '很抱歉, 公司还不能生产这种产品, 后期会扩充生产线!';
+        }
+    };
+
+    // 3. 设置工厂具备能力-扩展生产线
+    FruitMaker.prototype.extend = function (obj) {
+        for (var key in obj) {
+            this[key] = obj[key];
+        }
+    };
+
+    // 4. 工厂扩展生产线
+    FruitMaker.prototype.extend({
+        'Apple': function (meta) {
+            console.log('造了一杯苹果汁, 材料有:', meta);
+        },
+        'Pear': function (meta) {
+            console.log('造了一杯梨汁, 材料有:', meta);
+        }
+    });
+
+
+    // 1. 实例化水果工厂
+    var maker = new FruitMaker();
+
+    var appleObj = maker.make('Apple', '一个苹果, 一斤水');
+    console.log(appleObj.constructor.name);
+    var pearObj = maker.make('Pear', '两个梨, 一吨水');
+    console.log(pearObj.constructor.name);
+
+    var buzhidao = maker.make('xxx');
+
+</script>
+</body>
+</html>

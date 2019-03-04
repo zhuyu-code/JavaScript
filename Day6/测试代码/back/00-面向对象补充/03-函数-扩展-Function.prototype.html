@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>07-函数-扩展-Function.prototype</title>
+</head>
+<body>
+
+<script>
+    function sum(a,b) {
+        return a + b;
+    }
+</script>
+
+<!--length-->
+<script>
+    console.log(sum.length);
+</script>
+
+<!--name-->
+<script>
+    console.log(sum.name);
+</script>
+
+<!-- Object.arguments -->
+<!-- arguments.callee -->
+<script>
+
+    /*
+    *  1. Object.arguments
+    *     函数内部的一个隐藏参数，主要用来接收实参。
+    * */
+    function test() {
+    console.log(arguments);
+    console.log(test.arguments);
+    console.log(Object.prototype.toString.call(arguments)); // [object Arguments]
+    console.log(arguments.callee); // 参数对应的函数(标识是哪个函数对应的参数)
+    }
+    test(1,2,3);
+
+
+    /*
+    * arguments.callee
+    * 参数对应的函数(标识是哪个函数对应的参数)
+    * */
+    //    function jiecheng(n) {
+    //        if (n === 1) {
+    //            return 1;
+    //        }
+    //        return n * jiecheng(n-1);
+    //    }
+    //    console.log(jiecheng(4));
+
+    var result = (function (n) {
+        if (n === 1) {
+            return 1;
+        }
+        return n * arguments.callee(n-1);
+    })(4);
+    console.log(result);
+
+
+</script>
+
+
+<!--caller-->
+<script>
+
+    /*
+     * 获取某个函数的调用函数
+     * */
+    function b() {
+        console.log(b.caller); // a函数 c函数
+    }
+    function a() {
+        console.log(a.caller); // null
+        b();
+        function c() {
+            b();
+        }
+        c();
+    }
+    a();
+
+
+</script>
+
+
+<!--apply-->
+<script type="text/html">
+    var obj = {
+        tmpR: 10,
+        sum: function (num) {
+            this.tmpR += num;
+            return this.tmpR;
+        }
+    }
+
+//    var result = obj.sum(20);
+//    console.log('----', result);
+
+
+    var sumFunc = obj.sum;
+    console.log('-----', sumFunc(20));
+    console.log('-----', sumFunc.apply(obj, [20]));
+
+</script>
+<!--call-->
+<script type="text/html">
+    var obj = {
+        tmpR: 10,
+        sum: function (num) {
+            this.tmpR += num;
+            return this.tmpR;
+        }
+    }
+
+    //    var result = obj.sum(20);
+    //    console.log('----', result);
+
+
+    var sumFunc = obj.sum;
+    console.log('-----', sumFunc(20));
+    console.log('-----', sumFunc.call(obj, 20));
+</script>
+
+<!--bind-->
+<script>
+    var obj = {
+        tmpR: 10,
+        sum: function (num) {
+            this.tmpR += num;
+            return this.tmpR;
+        }
+    }
+
+    //    var result = obj.sum(20);
+    //    console.log('----', result);
+
+
+    var sumFunc = obj.sum;
+    console.log('-----', sumFunc(20));
+    console.log('-----', sumFunc.bind(obj)(20));
+
+
+    function bind(func, context) {
+        return function () {
+            func.apply(context, arguments);
+        }
+    }
+
+
+</script>
+
+
+
+<!--toString-->
+<script>
+
+</script>
+
+<!--constructor-->
+<script>
+
+</script>
+
+
+</body>
+</html>

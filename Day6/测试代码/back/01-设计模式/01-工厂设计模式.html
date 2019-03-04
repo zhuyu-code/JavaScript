@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01-工厂设计模式</title>
+</head>
+<body>
+
+<!--
+简单工厂模式
+给定原材料,加工出给定的产品
+-->
+<script type="text/html">
+    // 咖啡机
+    // 放入咖啡豆和水, 加工出不同比例的咖啡
+    function makeCoffe(dou, water) {
+        var obj = new Object();
+        obj.dou = dou;
+        obj.water = water;
+        obj.bili = dou / water;
+        return obj;
+    }
+
+    var coffe = makeCoffe(1, 10);
+    console.log('造出了纯度为', coffe.bili, '的咖啡');
+
+    var coffe2 = makeCoffe(2, 10);
+    console.log('造出了纯度为', coffe2.bili, '的咖啡');
+
+</script>
+
+<!--
+复杂工厂模式
+-->
+<script>
+
+    // 1. 设计工厂
+    function FruitMaker() {
+    }
+    // 2. 设置工厂具备能力-生产
+    FruitMaker.prototype.make = function (type, meta) {
+        // 2.1 根据指示, 检测,是否具备生产能力
+        if (typeof this[type] === 'function') {
+            // 2.2 如果具备, 则使用某条生产线, 开始生产产品
+            var func = this[type];
+            // 修改生产厂家
+            func.prototype = FruitMaker.prototype;
+            var obj = new func(meta);
+            // 2.3 返回产品
+            return obj;
+        }else {
+            throw '抱歉, 还不能生产这个产品, 你可以通过调用extend方法, 增加相应生产线';
+        }
+    }
+
+    // 3. 设置工厂具备能力-扩展生产线
+    FruitMaker.prototype.extend = function (obj) {
+        for (var key in obj) {
+            this[key] = obj[key];
+        }
+    }
+
+    // 4. 工厂扩展生产线
+    FruitMaker.prototype.extend({
+        'Apple': function (meta) {
+            console.log('造了一杯苹果汁', meta);
+        },
+        'Pear': function (meta) {
+            console.log('造了一杯梨汁', meta);
+        }
+    })
+
+
+
+    // 模拟开始使用工厂
+    var maker = new FruitMaker();
+
+    var appleObj = maker.make('Apple', '一个苹果, 一斤水');
+    console.log(appleObj.constructor.name);
+    var pearObj = maker.make('Pear', '两个梨, 一吨水');
+    console.log(pearObj.constructor.name);
+
+
+    var buzhidao = maker.make('xxx');
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>02-单例设计模式</title>
+</head>
+<body>
+
+
+<!--
+特点:在整个程序的运行过程中一个类型只有一个实例对象.
+	通过指定的构造函数, 无论创建多少次对象, 都只有一个
+-->
+<!--
+最终效果
+-->
+<script type="text/html">
+
+    function Tool() {
+    }
+
+    var t1 = new Tool();
+    var t2 = new Tool();
+    var t3 = new Tool();
+
+    console.log(t1 == t2);
+    console.log(t1 == t3);
+
+</script>
+
+
+<!--
+全局变量
+	步骤
+		    01 提供一个全局的变量
+		    02 提供一个构造函数Person
+		    03 在构造函数内部先判断全局变量是否有值,如果有那么就直接返回
+		    04 如果没有,那么就把this赋值给全局变量
+		    05 通过this设置属性和方法
+	缺点:
+		    使用一个全局变量来保存单例对象,该全局变量在整个作用域中都可以被访问或者是修改,可能会轻易的被覆盖或者是修改.
+		    修改之后,创建出来的实例对象就不再是之前的那个单例对象了.
+	优化:
+		全局变量-即时函数
+
+-->
+<script type="text/html">
+
+    var instace = null;
+    function Tool() {
+        if (instace) {
+            return instace;
+        }
+
+        instace = this;
+        this.name = 'sz';
+        this.age = 18;
+    }
+
+
+    var t1 = new Tool();
+    var t2 = new Tool();
+    console.log(t1 == t2);
+
+</script>
+
+
+<script type="text/html">
+
+    (function () {
+        var instace = null;
+        function Tool() {
+            if (instace) {
+                return instace;
+            }
+            instace = this;
+            this.name = 'sz';
+            this.age = 18;
+        }
+        window.Tool = Tool;
+    })(window);
+
+
+
+    var t1 = new Tool();
+    var t2 = new Tool();
+    console.log(t1 == t2);
+
+</script>
+
+
+<script type="text/html">
+
+    (function () {
+        function Tool() {
+            if (Tool.instace) {
+                return Tool.instace;
+            }
+            Tool.instace = this;
+            this.name = 'sz';
+            this.age = 18;
+        }
+        window.Tool = Tool;
+    })(window);
+
+
+    var t1 = new Tool();
+    var t2 = new Tool();
+    console.log(t1 == t2);
+
+</script>
+
+
+<!--
+惰性函数
+-->
+<script type="text/html">
+
+    function Tool() {
+        var instance = this;
+        this.name = 'sz';
+        this.age = 18;
+        Tool = function () {
+            return instance;
+        }
+    }
+
+    var t1 = new Tool();
+    var t2 = new Tool();
+    console.log(t1 == t2);
+
+</script>
+
+<!--
+问题:
+ 01 原型对象 在创建对象之后设置的原型对象和这个实例对象的原型对象并非是同一个,新设置的原型属性和方法无法访问
+ 02 构造函数 对象的构造函数属性指向的是旧的构造函数
+-->
+<script>
+    function Tool() {
+        var instance = null;
+        var tmpPrototype = Tool.prototype;
+        Tool = function () {
+            return instance;
+        };
+        Tool.prototype = tmpPrototype;
+        instance = new Tool();
+        instance.constructor = Tool;
+        instance.name = 'sz';
+        instance.age = 18;
+        return instance;
+    }
+
+    Tool.prototype.hi = 'hi';
+    var t1 = new Tool();
+    Tool.prototype.run = function () {
+        console.log('跑');
+    }
+
+    var t2 = new Tool();
+    console.log(t1 == t2);
+
+    console.log(t2.hi);
+    t1.run();
+    console.log(t1.constructor);
+
+
+</script>
+
+
+
+</body>
+</html>

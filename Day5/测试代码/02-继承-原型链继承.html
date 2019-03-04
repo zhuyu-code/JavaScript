@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    /**
+     * 构造函数Person
+     * @constructor
+     */
+    function Person() {
+       this.name = '撩课学院';
+       this.pets = ['小煤球', 'Python'];
+    }
+
+    Person.prototype.run = function () {
+        console.log('跑');
+    };
+
+
+    /**
+     * 构造函数Student
+     * @constructor
+     */
+    function Student() {
+
+       // copy父类的属性和方法
+       Person.call(this);
+       this.num = 'itlike.com';
+
+       // 思考一: 不合适
+      /*
+       this.name = '撩课学院';
+       this.pets = ['小煤球', 'Python'];
+      */
+
+      // 思考二: 把Person构造函数中的属性和方法copy一份, 并修改this的指向为当前的构造函数Student
+      // Person.call(this);
+
+      // 思考三: 注意覆盖关系
+    }
+
+    // 1. 构造父类的实例
+    var p = new Person();
+    // 2. 并设置为子类的原型对象
+    Student.prototype = p;
+    // 3.修复constructor指针即可
+    Student.prototype.constructor = Student;
+
+    // 实例对象1
+    var stu = new Student();
+    console.log(stu.name);
+    console.log(stu.pets);
+</script>
+<script>
+    // 实例对象2
+    var stu2 = new Student();
+
+    // 修改实例对象1的name
+    stu.name = '周杰伦';
+    console.log(stu2.name); // 基本数据类型不会受影响
+
+    // 修改实例对象1的宠物
+    var pets = stu.pets;
+    pets.push('小花');
+
+    console.log(stu.pets);
+    console.log(stu2.pets); // 应该输出两个, 但输出三个
+</script>
+<!--
+借用构造函数继承; 在子构造函数内部, 调用父构造函数
+-->
+<script type="text/html">
+
+    function Animal() {
+        this.name = '小黑';
+    }
+
+    function Erha() {
+        Animal.call(this);
+        this.age = 18;
+    }
+
+    var erha = new Erha();
+    console.log(erha.age);
+    console.log(erha.name);
+</script>
+</body>
+</html>

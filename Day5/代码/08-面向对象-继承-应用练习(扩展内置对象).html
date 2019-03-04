@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>08-面向对象-继承-应用练习(扩展内置对象)</title>
+</head>
+<body>
+<script type="text/html">
+    var arr = [1, 2, 3];
+    arr.run = function () {
+        console.log('跑');
+    };
+    arr.run();
+
+    var arr2 = [2];
+    arr2.run();
+</script>
+<script type="text/html">
+    Array.prototype.push = function () {
+        console.log('跑');
+    };
+
+    var arr = [1, 2, 3];
+    arr.push('111');
+    console.log(arr);
+
+    var arr2 = [2];
+    arr2.push('2222');
+    console.log(arr2);
+
+</script>
+<script>
+    function MyArray() {}
+    MyArray.prototype = new Array();
+    MyArray.prototype.run = function () {
+        console.log('跑');
+    };
+
+    var arr2 = new MyArray();
+    console.log(arr2);
+</script>
+</body>
+</html>

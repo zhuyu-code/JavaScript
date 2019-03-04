@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>简单工厂函数的方式来创建对象</title>
+</head>
+<body>
+
+<script>
+
+    function createObject(name, run) {
+        var p = new Object();
+        p.name = name;
+        p.run = run;
+        return p;
+    }
+
+
+//    <!--代码的复用性差, 代码的冗余度高-->
+
+    var p1 = createObject('sz', function () {
+        console.log('跑' + this.name);
+    });
+    var p2 = createObject('zs', function () {
+        console.log('跑' + this.name);
+    });
+
+
+    // 创建一个小狗
+    var dog = createObject('马铃薯', function () {
+        console.log('一边跑, 一遍叫' + this.name);
+    })
+
+
+    console.log(p1.name);
+    p1.run();
+    console.log(p2.name);
+    p2.run();
+    console.log(dog.name);
+    dog.run();
+
+    console.log(typeof p1);
+    console.log(typeof p2);
+    console.log(typeof dog);
+
+    console.log(p1.constructor.name);
+    console.log(p2.constructor.name);
+    console.log(dog.constructor.name);
+
+
+</script>
+
+</body>
+</html>

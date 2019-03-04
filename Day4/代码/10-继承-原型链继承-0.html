@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    /**
+     * 构造函数Person
+     * @constructor
+     */
+    function Person() {
+       this.name = '撩课学院';
+       this.pets = ['小煤球', 'Python'];
+    }
+
+    Person.prototype.run = function () {
+        console.log('跑');
+    };
+
+
+    /**
+     * 构造函数Student
+     * @constructor
+     */
+    function Student() {
+       this.num = 'itlike.com';
+    }
+
+    // 1. 构造父类的实例
+    var p = new Person();
+    // 2. 并设置为子类的原型对象
+    Student.prototype = p;
+
+    var stu = new Student();
+    console.log(stu);
+
+    console.log(stu.num);
+    stu.run();
+    console.log(stu.name);
+    console.log(stu.pets);
+
+    console.log(stu.constructor.name);
+</script>
+</body>
+</html>

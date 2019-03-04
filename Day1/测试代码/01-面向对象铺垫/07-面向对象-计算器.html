@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>面向对象小案例</title>
+</head>
+<body>
+
+<!--
+模拟计算器加减乘除操作
+-->
+<!--
+函数的方式
+-->
+<script>
+   function jia(a, b) {
+       return a + b;
+   }
+
+   function jian(a, b) {
+       return a - b;
+   }
+
+    function cheng(a, b) {
+        return a * b;
+    }
+
+    function chu(a, b) {
+        return a / b;
+    }
+
+    // (6 + 6) * 2 / 3
+   console.log(chu(cheng(jia(6, 6), 2), 3));
+
+</script>
+
+<!--
+对象的方式
+-->
+<script>
+    var Caculator = {
+        result: 0,
+        jia: function (num) {
+            // this, 一般代表方法的调用者
+            this.result += num;
+        },
+        jian: function (num) {
+            // this, 一般代表方法的调用者
+            this.result -= num;
+        },
+        cheng: function (num) {
+            // this, 一般代表方法的调用者
+            this.result *= num;
+        },
+        chu: function (num) {
+            // this, 一般代表方法的调用者
+            this.result /= num;
+        },
+        log: function () {
+            console.log(this.result);
+        }
+    };
+
+    // (6 + 6) * 2 / 3
+    Caculator.jia(6);
+    Caculator.jia(6);
+    Caculator.cheng(2);
+    Caculator.chu(3);
+    Caculator.log();
+
+</script>
+
+<!--
+优化: 理解
+-->
+<script>
+    var Caculator = {
+        result: 0,
+        jia: function (num) {
+            // this, 一般代表方法的调用者
+            this.result += num;
+            return this;
+        },
+        jian: function (num) {
+            // this, 一般代表方法的调用者
+            this.result -= num;
+            return this;
+        },
+        cheng: function (num) {
+            // this, 一般代表方法的调用者
+            this.result *= num;
+            return this;
+        },
+        chu: function (num) {
+            // this, 一般代表方法的调用者
+            this.result /= num;
+            return this;
+        },
+        log: function () {
+            console.log(this.result);
+            return this;
+        },
+        clean: function () {
+            this.result = 0;
+            return this;
+        }
+    };
+
+    // (6 + 6) * 2 / 3
+    Caculator.jia(6).jia(6).cheng(2).chu(3).log();
+    Caculator.clean().jia(2).log();
+
+</script>
+</body>
+</html>

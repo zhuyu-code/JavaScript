@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>08-js任务执行</title>
+</head>
+<body>
+
+
+<script>
+
+    console.log('xxx', new Date());
+    setTimeout(function () {
+        console.log('xxx', new Date());
+    }, 1000)
+
+
+</script>
+
+<!--
+js执行任务的类型
+1. 渲染任务
+2. 主要任务
+3. 事件型任务(点击事件|定时器事件)
+-->
+<script>
+
+//    // 此处打印了10次10
+//    for (var i = 0; i < 10; i ++) {
+////        setTimeout(function () {
+////            console.log(i);
+////        }, 0);
+////        console.log(i);
+//
+//        (function(j){
+//            setTimeout(function(){
+//                console.log(j);
+//            },0);
+//        })(i)
+//
+//        console.log('xxx');
+//    }
+
+
+</script>
+
+
+<ul>
+    <li>li1</li>
+    <li>li2</li>
+    <li>li3</li>
+    <li>li4</li>
+    <li>li5</li>
+    <li>li6</li>
+</ul>
+
+
+<script>
+
+    var lis = document.getElementsByTagName('li');
+    for (var i = 0, len = lis.length; i < len; i++) {
+
+        var li = lis[i];
+        li.onclick = (function (j) {
+            return function () {
+                console.log('点击了', j);
+            }
+        })(i)
+
+    }
+
+
+
+</script>
+
+
+</body>
+</html>

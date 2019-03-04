@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>07-面向对象-扩展-基本包装类型</title>
+</head>
+<body>
+
+<script>
+
+    var b = true;
+    var bObj = new Boolean(false);
+    console.log(bObj && b); // true
+
+
+    var num = 10;
+    var numObj = new Number(10);
+    console.log(num == numObj);
+    console.log(num === numObj);
+
+    // 基本数据类型, 哪来的属性?
+    /*
+*           001 首先会创建一个对应的对象
+    002 通过该对象来访问属性调用方法
+    003 得到结果之后返回,然后销毁改对象
+    *
+    * */
+    console.log('abc'.length);
+
+
+
+</script>
+
+</body>
+</html>

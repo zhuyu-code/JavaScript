@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>05-命名空间设计模式</title>
+</head>
+<body>
+
+<script>
+
+    var a = 10;
+    var sum = function (a, b) {
+        return a + b;
+    }
+
+    // 问题: 容易污染全局变量
+    // 容易引发冲突
+    // 检索性能低
+
+</script>
+
+<!--<script>-->
+
+    <!--var SZNAMESPACE = {};-->
+    <!--SZNAMESPACE.a = 10;-->
+    <!--SZNAMESPACE.sum = function (a, b) {-->
+        <!--return a + b;-->
+    <!--};-->
+
+
+
+    <!--// 使用-->
+    <!--console.log(SZNAMESPACE.a);-->
+    <!--console.log(SZNAMESPACE.sum(1,2));-->
+
+
+<!--</script>-->
+
+
+<script>
+
+//    var XMG = {};
+//    XMG.SZ.a = 10;
+//    XMG.SZ.sum = function (a, b) {
+//        return a + b;
+//    };
+
+    var XMG = XMG || {};
+    // 声明一个函数, 给一个命名空间下的变量赋值
+    function NameSpace(nameSpace, value) {
+
+        // 1.按照.对字符串进行分割
+        var names = nameSpace.split('.');
+        if (names.length == 0) {
+            return;
+        }
+        if (names[0] == 'XMG') {
+            names.splice(0,1);
+        }
+
+        var parent = XMG;
+        for (var i = 0, len = names.length; i < len; i++) {
+            var name = names[i];
+            if (parent[name]=== undefined) {
+                parent[name] = {};
+                if (i == len - 1) {
+                    parent[name] = value;
+                }
+            }
+            parent = parent[name];
+        }
+    }
+
+    NameSpace('XMG.SZ.MOMO.a', 100);
+
+
+// 使用
+//    console.log(XMG);
+    console.log(XMG.SZ.MOMO.a);
+
+
+
+</script>
+
+
+
+</body>
+</html>

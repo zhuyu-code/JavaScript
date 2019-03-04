@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>02-工厂设计模式</title>
+</head>
+<body>
+
+
+<script type="text/html">
+    /**
+     * 咖啡机
+     * @param {number}dou
+     * @param {number}water
+     * @returns {Object}
+     */
+    function makeCoffee(dou, water) {
+        var obj = new Object();
+        obj.dou = dou;
+        obj.water = water;
+        obj.bili = dou / water;
+        return obj;
+    }
+
+    var coffee = makeCoffee(1, 10);
+    console.log('造出纯度为:', coffee.bili, '的咖啡');
+
+    var coffee1 = makeCoffee(2, 10);
+    console.log('造出纯度为:', coffee1.bili, '的咖啡');
+</script>
+<script>
+    /**
+     * 果汁工厂
+     * @constructor
+     */
+    function FruitMaker() {
+
+        this.Apple = function (meta) {
+            console.log('造出一杯苹果汁, 材料包括:', meta);
+        };
+
+
+        this.Pear = function (meta) {
+            console.log('造出一杯梨子汁, 材料包括:', meta);
+        };
+    }
+
+    /**
+     * 对外招商
+     * @param type 类型
+     * @param meta 材料
+     */
+    FruitMaker.prototype.make = function (type, meta) {
+        // 2.1 根据传入, 检测, 是否具备生产能力
+        if(typeof  this[type] === 'function'){
+            // 2.2 如果具备, 使用生产线去生产
+            var func =  this[type];
+            //  2.3 修改生产厂家(对外统一)
+            func.prototype = FruitMaker.prototype;
+
+            console.log(func);
+            // 2.4 返回产品
+            return new func(meta);
+        }else {
+            throw '很抱歉, 公司暂时不能生产这种果汁, ....';
+        }
+
+    };
+
+    FruitMaker.prototype.extend = function(obj){
+        for(var key in obj){
+            this[key] = obj[key];
+        }
+    };
+
+
+    // 工厂的扩展生产线
+    FruitMaker.prototype.extend({
+        // 苹果汁
+        'Apple': function (meta) {
+            console.log('造出一杯苹果汁, 材料包括:', meta);
+        },
+        // 梨子汁
+        'Pear': function (meta) {
+            console.log('造出一杯梨子汁, 材料包括:', meta);
+        }
+    });
+
+    var maker = new FruitMaker();
+    var appleObj = maker.make('Apple', '一个苹果, 一斤水');
+    console.log(appleObj.constructor.name);
+
+    var pearObj = maker.make('Pear', '一个梨子, 一斤水');
+    console.log(pearObj.constructor.name);
+</script>
+<script type="text/html">
+    var obj = {
+        apple: function () {
+            console.log('11111');
+        }
+    };
+
+    console.log(obj.apple());
+</script>
+</body>
+</html>

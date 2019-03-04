@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    /*
+    var arr = new Array();
+    arr.eat = function () {
+        console.log('我会吃东西');
+    }
+
+    // 调用数组吃的方法
+    arr.eat();
+    */
+
+    // 所有的数组对象都能使用该方法
+    /*
+      prototype:  让开发者有能力向对象添加属性和方法。
+    */
+    Array.prototype.eat = function () {
+        console.log('我会吃东西');
+    };
+
+    Array.prototype.name = '我是数组';
+
+    // 创建数组
+    /*
+    var arr1 = new Array();
+    arr1.eat();
+    console.log(arr1.name);
+
+    var arr2 = [];
+    arr2.eat();
+    console.log(arr2.name);
+    */
+
+
+    // constructor 返回对创建此对象的数组函数的引用
+    var arr1 = new Array();
+    var arr2 = [];
+
+    console.log(arr1.constructor);
+    console.log(arr2.constructor);
+    console.log(arr1.constructor === arr2.constructor);
+
+    console.log(Array.constructor);
+
+</script>
+</body>
+</html>

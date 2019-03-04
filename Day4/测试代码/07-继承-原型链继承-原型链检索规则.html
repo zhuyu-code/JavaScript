@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>03-继承-原型链继承-原型链检索规则</title>
+</head>
+<body>
+<!--
+对象.属性的方法去访问属性的时候，先查找有没有对应的实例属性，如果有那么就直接使用
+如果没有，那么就去该对象的原型对象上面去找，如果有那么就直接使用
+如果没有，那么就接着查找原型对象的原型对象，如果有，那么就直接使用，
+如果没有，那么就继续上面的搜索过程
+直到搜索到Object.prototype为止，如果还是没有找到就返回undefined或者是报错
+原型链搜索的路径越长，查询属性所花费的时间就越多
+注意：
+	原型链搜索的路径越长，查询属性所花费的时间就越多
+	原则：就近原型
+
+-->
+
+
+<script>
+
+    function Person(name) {
+        this.name = name;
+        this.toString = function () {
+            console.log('我是增加在对象上的方法');
+        };
+    }
+
+    Person.prototype.toString = function () {
+        console.log('我是增加在原型对象上的方法');
+    };
+
+    var p = new Person('sz');
+    p.toString();
+
+
+</script>
+
+
+
+</body>
+</html>

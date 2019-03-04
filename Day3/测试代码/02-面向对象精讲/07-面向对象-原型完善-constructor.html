@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>12-面向对象-原型完善-constructor</title>
+</head>
+<body>
+
+<!--construnctor: 构造器-->
+<script>
+
+    function Person() {}
+    var p = new Person();
+    console.log(p);
+
+    // 可以沿着这条线找到类型名称
+    console.log(p.constructor.name);
+
+    Person.prototype = {
+        constructor: Person,
+        name: 'sz',
+        age: 18
+    };
+
+    var p2 = new Person();
+    console.log(p2.constructor.name);
+
+</script>
+
+
+</body>
+</html>

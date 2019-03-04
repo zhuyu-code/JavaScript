@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>11-ECMAScript-异常处理</title>
+</head>
+<body>
+
+<script>
+    /*console.log(num);
+    console.log(10);*/
+
+    // 1. 异常处理
+    /*
+    try {
+        console.log(num);
+    }catch (e) {
+        console.log('出现错误, 被捕捉到, 但是不会影响后续代码执行', e);
+    }
+    console.log(10);
+    */
+
+
+    // 2. 完成回调
+    function devide(a, b) {
+        if (b === 0) {
+            throw '除数不能为0';
+        }
+        return a / b;
+    }
+    // console.log(devide(10, 0));
+
+    try {
+        console.log(devide(10, 0));
+    }catch (e) {
+        console.log(e);
+    }finally  {
+        console.log('不管错没错,都会进来执行,一般在这释放一些资源');
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>06-面向对象-扩展-Array静态方法</title>
+</head>
+<body>
+
+
+<!--
+of()
+根据一个参数, 构建出来一个数组
+-->
+<script type="text/html">
+
+    var arr = Array.of(7);
+    console.log(arr);
+
+    arr = Array.of(1, 2, 3);
+    console.log(arr);
+
+    arr = Array(7);
+    console.log(arr);
+
+    arr = Array(1, 2, 3);
+    console.log(arr);
+
+
+    // of 可以遍历字符串
+    var arr = [1,2,3,4];
+    var str = 'abcdefg';
+    for (var value of str) {
+    console.log(value);
+    }
+
+
+</script>
+
+<!--
+from: 从一个类数组里面, 拷贝出来一个新的数组
+-->
+<script type="text/html">
+
+    var obj = {0: 'sz', 1: 18, 'length': 4};
+
+    // from 将伪数组 -> 真数组
+    var newArr = Array.from(obj);
+    console.log(newArr);
+
+    function createArray() {
+        return Array.from(arguments);
+    }
+
+    var newArr2 = createArray(1,2,3,4,5);
+    console.log(newArr2);
+
+</script>
+
+<script type="text/html">
+
+//   var arr = Array.from([1, 2, 3], v => v * v);
+   var arr = Array.from([1, 2, 3], (v, i) => i + v);
+   console.log(arr);
+
+</script>
+
+<script>
+
+    var obj = {0:'sz', 1: 18, 'length': 2};
+    var arr = [1,2,3];
+    console.log(Array.isArray(obj));
+    console.log(Array.isArray(arr));
+
+</script>
+
+
+</body>
+</html>

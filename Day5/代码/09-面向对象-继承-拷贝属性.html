@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script type="text/html">
+    var obj = {name: '撩课', age: 19};
+    var copyObj = {};
+
+    for(var key in obj){
+        copyObj[key] = obj[key];
+    }
+
+    obj.name = '周杰伦';
+    console.log(obj);
+    console.log(copyObj);
+</script>
+<script type="text/html">
+    var obj = {name: '撩课', age: 19};
+    var copyObj = {};
+
+    Object.assign(copyObj, obj, {address: '上海'});
+
+    obj.name = '周杰伦';
+    console.log(obj);
+    console.log(copyObj);
+</script>
+<script>
+    var obj = {name: '撩课', age: 19, pets: ['小煤球', 'Python']};
+    var copyObj = {};
+
+    Object.assign(copyObj, obj);
+
+    obj.pets.push('哈哈哈哈');
+
+    console.log(obj);
+    console.log(copyObj);
+</script>
+</body>
+</html>

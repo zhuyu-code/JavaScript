@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    /*
+    console.log(num);
+    console.log(10);
+    */
+
+    // 1. 异常处理
+   /*
+    try{
+        console.log(num);
+    }catch (e) {
+        console.log(e);
+    }
+
+    console.log(10);
+    */
+
+   function devide(a, b) {
+       /* if(0 === b){ // 分子为零
+           // 抛出异常
+           throw '分子不能为零!'
+        }*/
+        return a /b;
+   }
+
+   try {
+       console.log(devide(10, 0));
+   }catch (e) {
+       console.log(e);
+   }finally {
+       console.log('不管有错没错, 都会进来执行, 一般在这里释放资源');
+   }
+
+    console.log(1111);
+    //  console.log(devide(10, 0));
+
+</script>
+</body>
+</html>

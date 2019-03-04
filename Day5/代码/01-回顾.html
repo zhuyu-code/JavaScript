@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!--
+  函数的prototype属性
+	每个函数都有一个prototype属性, 它默认指向一个Object空对象(即称为: 原型对象)
+	原型对象中有一个属性constructor, 它指向函数对象
+
+  原型对象添加属性(一般都是方法)
+	 函数的所有实例对象自动拥有原型中的属性(方法)
+-->
+
+<script>
+   //  console.log(new Object());
+
+    var demo1 = {
+        name: '老实人',
+        logSomeThing: function (params1, params2) {
+            console.log(this.name, params1, params2);
+        }
+    };
+
+    // demo1.logSomeThing('农夫', '老师');
+
+    var demo2 = {
+       name: '小偷'
+    };
+
+    // demo2.logSomeThing('采花大盗', '怪侠一枝梅');
+
+    // call , apply
+    // demo1.logSomeThing.call(demo2, '采花大盗', '怪侠一枝梅');
+    // demo1.logSomeThing.apply(demo2, ['采花大盗1', '怪侠一枝梅1']);
+</script>
+<script>
+    function Person() {
+        this.name = '张三';
+        this.age = 18;
+    }
+
+    function Student() {
+        // 1. 借调
+        Person.call(this);
+        this.sex = '男';
+    }
+
+
+    var s = new Student();
+    console.log(s);
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+
+
+var user = {
+    name: '撩课',
+    age: 12,
+    gender: '女'
+};
+var box = document.getElementById('box');
+(function (name) {
+    box.onclick = function() {
+        box.innerHTML = name;
+    };
+})(user.name);
+// ...其他操作
+user = null; // 释放对象
+</script>
+</body>
+</html>

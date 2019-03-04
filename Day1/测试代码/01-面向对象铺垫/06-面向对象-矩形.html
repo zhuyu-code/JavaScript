@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+   <div id="main"></div>
+<script>
+    function Rect(options) {
+        this._init(options)
+    }
+
+    Rect.prototype = {
+        _init: function (options) {
+            options = options || {};
+
+            // 放在哪里?
+            this.parentId = options.parentId;
+
+            // 位置
+            this.left = options.left || 0;
+            this.top = options.top || 0;
+
+            // 自身属性
+            this.width = options.width || 0;
+            this.height = options.height || 0;
+            this.bgColor = options.bgColor || '#000';
+            this.borderRadius = options.borderRadius || 0;
+            this.border = options.border;
+        },
+
+        render: function () {
+            // 1. 获取父标签
+            var parentElement = document.getElementById(this.parentId);
+
+            // 2. 创建标签
+            var childElement = document.createElement('div');
+            parentElement.appendChild(childElement);
+
+            childElement.style.position = 'absolute';
+            childElement.style.left = this.left + 'px';
+            childElement.style.top = this.top + 'px';
+            childElement.style.width = this.width + 'px';
+            childElement.style.height = this.height + 'px';
+            childElement.style.backgroundColor = this.bgColor;
+            childElement.style.border = this.border;
+            childElement.style.borderRadius = this.borderRadius + 'px';
+
+        }
+    };
+
+
+    // 实例化矩形对象
+    var rect = new Rect({
+        parentId:'main',
+        left:100,
+        top:200,
+        width:500,
+        height:300,
+        bgColor:'yellow',
+        border:'10px solid #000',
+        borderRadius:20
+    });
+    rect.render();
+</script>
+</body>
+</html>

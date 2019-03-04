@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>04-面向对象-三大特性</title>
+</head>
+<body>
+
+<script type="text/html">
+    var name1 = 'sz';
+    var name2 = 'zs';
+    var age1 = 18;
+    var age2 = 20;
+    var adderss1 = '上海';
+    var adderss2 = '北京';
+    console.log(name2); // 表述姓名含义
+    console.log(name3);
+
+    var p1 = {
+    name: 'sz',
+    age: 18,
+    address: '上海'
+    }
+
+    var p2 = {
+    name: 'zs',
+    age: 19,
+    address: '北京'
+    }
+</script>
+
+<script type="text/html">
+    var p1 = {
+    name: 'sz',
+    age: 18,
+    address: '上海'
+    }
+
+    var p2 = {};
+
+    // 继承: 继承资源
+    for (var key in p1) {
+    p2[key] = p1[key];
+    }
+    console.log(p2);
+</script>
+
+<!--
+   // 弱类型: 不同类型之间运算, 会存在隐式转换
+   // 强类型: 不同类型之间运算, 需要显示的转换为同一个类型进行运算
+-->
+<script>
+
+    var obj = {name: 'sz'};
+    console.log(obj.toString()); // [object Object]
+    var arr = [1, 2, 3];
+    console.log(arr.toString()); // 1,2,3
+
+    var num = 1;
+    var str = '123';
+    console.log(str + num);
+
+    // swift 强类型语言
+    // var i = 1; // Int
+    // var f = 1.1; // float
+    // i + f
+</script>
+
+
+</body>
+</html>

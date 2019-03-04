@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    /**
+     * 构造函数Person
+     * @constructor
+     */
+    function Person() {
+       this.name = '撩课学院';
+       this.pets = ['小煤球', 'Python'];
+    }
+
+    Person.prototype.run = function () {
+        console.log('跑');
+    };
+
+
+    /**
+     * 构造函数Student
+     * @constructor
+     */
+    function Student() {
+       this.num = 'itlike.com';
+    }
+
+    var stu = new Student();
+    console.log(stu);
+    console.log(stu.num);
+    console.log(stu.name);
+    console.log(stu.pets);
+    stu.run();
+</script>
+</body>
+</html>

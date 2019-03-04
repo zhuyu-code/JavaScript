@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    // 1. 要拷贝的对象
+    var obj = {
+        name: '撩课',
+        age: 18,
+        friends: ['小花', '小黑'],
+        goodF: {
+            name: '小撩',
+            age: 19,
+            adress: '上海',
+            pets: [{name: '土豆'}, {name: '马铃薯'}]},
+        bir: new Date()
+    };
+
+
+    function deepCopyObj2NewObj(fromObj, toObj) {
+          //  在函数中先检查第一个参数是否有值，
+         //  如果没有值那么就初始化一个空的对象
+         for(var key in fromObj){
+             var fromValue = fromObj[key];
+             if(!isObj(fromValue)){
+                 toObj[key] = fromValue;
+             }else {
+                 // 如果是引用类型，那么就再调用一次这个方法，去内部拷贝这个对象的所有属性
+                 var temObj = new fromValue.constructor;
+                 deepCopyObj2NewObj(fromValue, temObj);
+                 toObj[key] = temObj
+             }
+         }
+    }
+
+    function isObj(obj) {
+        return obj instanceof Object;
+    }
+
+    function isArr(obj) {
+        return Array.isArray(obj);
+        // return Object.prototype.toString.call(obj) === '[object Array]'
+    }
+
+    var newObj = {};
+    deepCopyObj2NewObj(obj, newObj);
+
+    obj.goodF.pets[0]['size'] = '100px';
+
+    console.log(obj);
+    console.log(newObj);
+
+</script>
+</body>
+</html>

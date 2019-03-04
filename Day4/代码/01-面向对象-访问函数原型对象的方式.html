@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01-面向对象-访问函数原型对象的方式</title>
+</head>
+<body>
+
+<script>
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    // 原型对象
+    Person.prototype.run = function () {
+        console.log('跑');
+    };
+
+    Person.prototype = {
+
+    };
+
+
+    // 方式一
+    console.log(Person.prototype);
+
+    // 方式二
+    var p = new Person();
+    // console.log(p);
+    console.log(p.__proto__);
+
+    // ?
+    var newYX = {
+        'add': function () {
+            console.log('sum');
+        }
+    };
+
+    p.__proto__ = newYX;
+    console.log(p.__proto__);
+</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>11-面向对象-isPrototypeOf和instanceOf</title>
+</head>
+<body>
+
+<!--
+   isPrototypeOf: 判断一个对象, 是否是某个实例的原型对象
+-->
+<script type="text/html">
+
+    function Person() {}
+    var p = new Person();
+    console.log(Person.prototype.isPrototypeOf(p)); // true
+
+
+   /*
+    var obj = {
+       name: '撩课'
+   };
+   Person.prototype = obj;
+   console.log(Person.prototype.isPrototypeOf(p)); // false
+    */
+
+
+    var obj = {
+        name: '撩课'
+    };
+    Person.prototype = obj;
+
+    var p2 = new Person();
+    console.log(Person.prototype.isPrototypeOf(p2)); // true
+
+</script>
+
+<!--
+instanceOf : 判断一个对象, 是否是某个构造函数的原型链上
+-->
+<script>
+    function Person() {}
+    var p = new Person();
+    console.log(p instanceof Person); // true
+
+    var obj = {
+        name: '撩课'
+    };
+    Person.prototype = obj;
+
+    var p2 = new Person();
+    console.log(p2);
+    console.log(p2 instanceof Person);
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>04-面向对象-原型完善-constructor</title>
+</head>
+<body>
+
+<script>
+    function Person() {}
+
+    var p = new Person();
+    console.log(p);
+    // console.log(p.constructor.name);
+
+    Person.prototype = {
+         constructor: Person, // 一定要设置, 指向Object
+         name: '撩课',
+         age: 18
+    };
+
+    var p1 = new Person();
+    console.log(p1);
+    console.log(p1.constructor.name);
+</script>
+</body>
+</html>

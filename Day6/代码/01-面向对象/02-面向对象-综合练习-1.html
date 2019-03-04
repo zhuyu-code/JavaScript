@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>02-面向对象-综合练习-1</title>
+</head>
+<body>
+<script>
+    /**
+     * 构造函数 书籍类
+     * @param {string}bookID
+     * @param {string}bookName
+     * @param {number}bookPrice
+     * @param {number}oldLevel
+     * @constructor
+     */
+    function Book(bookID, bookName, bookPrice, oldLevel) {
+        this.bookID = bookID; // 书籍的ID(唯一)
+        this.bookName = bookName; // 书籍的名称
+        this.bookPrice = bookPrice; // 书籍的价格
+        this.oldLevel = oldLevel; // 书籍的新旧程度(0-10)(旧-新)
+    }
+
+    // 原型对象
+    Book.prototype.desc = function () {
+        return 'ID:' + this.bookID + ', 书名: ' + this.bookName + ', 价格:' + this.bookPrice + ',新旧程度: ' + this.oldLevel;
+    }
+</script>
+<script>
+    function Library(libName) {
+        // 1. 私有变量 仓库
+        var store = [];
+        this.libName = libName;
+        /**
+         * 存储图书
+         * @param {object}bookObj
+         */
+        this.saveBook = function (bookObj) {
+            store.push(bookObj);
+            console.log('成功存入:' + bookObj.desc());
+        };
+        /**
+         *  借出图书
+         * @param {string}bookID
+         * @returns {*}
+         */
+        this.borrowBook = function (bookID) {
+            // 1. 遍历所有图书
+            for (var i = 0; i < store.length; i++) {
+                // 2. 取出图书
+                var bookObj = store[i];
+                // 3. ID对比
+                if (bookObj.bookID === bookID) { // 找到
+                    break; // 跳出循环
+                }
+            }
+
+            // 4. 判断
+            if (i === store.length) {
+                console.log('查无此书');
+                return;
+            }
+
+            // 5. 把图书从仓库移除
+            var borrowBook = store.splice(i, 1)[0];
+
+            // 6. 返回出借的图书
+            console.log('成功出借: \n' + borrowBook.desc());
+            return borrowBook;
+        };
+        /**
+         * 查询所有的图书
+         * @returns {Array}
+         */
+        this.queryAllBook = function () {
+            var result = '图书馆内共有以下图书: \n';
+            for (var i = 0; i < store.length; i++) {
+                var bookObj = store[i];
+                result += bookObj.desc() + '\n';
+            }
+            console.log(result);
+            return store;
+        };
+        /**
+         * 根据书ID查询图书
+         * @param bookID
+         * @returns {*}
+         */
+        this.queryBookWithID = function (bookID) {
+            // 1. 遍历所有的图书
+            for (var i = 0; i < store.length; i++) {
+                // 2. 取出图书
+                var bookObj = store[i];
+                // 3. ID对比
+                if (bookObj.bookID === bookID) { // 找到
+                    break; // 跳出循环
+                }
+            }
+            // 4. 判断
+            if (i === store.length) {
+                console.log('查不到ID为:' + bookID + '的书籍');
+                return;
+            }
+            // 5. 返回书籍
+            console.log('查到ID为:' + bookID + '的书籍: \n' + bookObj.desc());
+            return bookObj;
+        }
+    }
+</script>
+<script>
+   /* var book = new Book('TS001', 'JS面向对象', 30.88, 10);
+    console.log(book.desc());*/
+
+   // 1. 创建4本书
+    var book1 = new Book('TS001', 'JS基础', 30, 9);
+    var book2 = new Book('TS002', 'JS进阶', 40, 6);
+    var book3 = new Book('TS003', 'JS面向对象', 60, 8);
+    var book4 = new Book('TS004', '颈椎病康复秘技', 1230, 10);
+
+    // 2.存入图书馆
+    var library = new Library('建华图书馆');
+    library.saveBook(book1);
+    library.saveBook(book2);
+    library.saveBook(book3);
+    library.saveBook(book4);
+
+    // 3. 借出书籍
+    library.borrowBook('TS004');
+
+    // 4. 查询还剩多少图书
+    library.queryAllBook();
+
+    // 5. 根据ID查询
+    library.queryBookWithID('TS001');
+</script>
+</body>
+</html>

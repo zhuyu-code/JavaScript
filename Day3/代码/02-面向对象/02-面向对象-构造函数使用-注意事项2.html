@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+        this.run = function () {
+            console.log(this.age + '跑');
+        };
+
+        return this;
+    }
+
+    // 标准调用
+  /*  var p = new Person('zs', 18);
+    console.log(p);
+
+    var p1 = new Person();
+    console.log(p1);
+
+    var p2 = new Person;
+    console.log(p2);*/
+
+    // 问题调用
+    /*var p = new Person('zs', 18);
+    p.run();
+
+    var run = p.run;
+    run();*/
+
+    /*var p = Person();
+    console.log(p);*/
+
+    var p = new Person('zz', 19);
+    console.log(p);
+</script>
+</body>
+</html>

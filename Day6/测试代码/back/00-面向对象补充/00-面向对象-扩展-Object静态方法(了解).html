@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01-面向对象-扩展-Object静态方法(了解)</title>
+</head>
+<body>
+
+<script type="text/html">
+    console.log(Object);
+    var num = -0;
+    var num2 = +0;
+    console.log(num == num2);
+    console.log(num === num2);
+
+    console.log(Object.is(num, num2));
+    console.log(NaN == NaN);
+    console.log(NaN === NaN);
+    console.log(Object.is(NaN, NaN));
+//    isNaN()
+
+    if (!Object.is) {
+        Object.is = function(x, y) {
+            if (x === y) {
+                // +0 -0
+                // 1, 1
+                return x !== 0 || 1 / x === 1 / y;
+            } else {
+
+                return x !== x && y !== y;
+            }
+        };
+    }
+
+
+</script>
+<script type="text/html">
+
+    /*
+    *  2. Object.assign(目标对象, 源对象1, 源对象2, 源对象3...);
+    *     拷贝源对象的所有属性到目标对象中
+    *     如果存在重复属性, 按照顺序, 则后者会把前者覆盖;
+    * */
+    var obj1 = {name: 'sz'};
+    var obj2 = {age: 18};
+    var obj3 = {name: '葱花'};
+    Object.assign(obj3, obj1, obj2);
+    console.log(obj3);
+
+</script>
+<script type="text/html">
+
+//    var obj = {name: 'sz', age: 18, address: '上海'};
+
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    Person.xxx = '1234';
+    Person.prototype.address = '上海';
+
+    var obj = new Person('sz', 18);
+
+
+    // 遍历: 实例属性和原型对象属性
+    var keys = [];
+    var values = [];
+    for(var key in Person) {
+        keys.push(key);
+        values.push(Person[key]);
+    }
+
+    console.log(keys, values);
+
+    // 不包含原型对象上的属性, 实例属性
+    console.log(Object.keys(Person));
+    console.log(Object.values(Person));
+
+</script>
+
+<script type="text/html">
+
+
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    Person.xxx = '1234';
+    Person.prototype.address = '上海';
+
+    var obj = new Person('sz', 18);
+
+    console.log(Object.getOwnPropertyNames(Person));
+    console.log(Object.keys(Person));
+
+
+</script>
+
+
+<script type="text/html">
+
+    var arr = [1,2,3];
+    console.log(arr);
+
+    for (var key in arr) {
+        console.log(key, arr[key]);
+    }
+
+    // 对象里面, 每一个属性, 都有相应的描述, 这些描述, 可以控制, 是否可以遍历到, 能不能重新赋值
+
+    // 枚举
+//    console.log(Object.getOwnPropertyDescriptor(arr, '0'));
+    arr[0] = 666;
+//    console.log(Object.getOwnPropertyDescriptor(arr, 'length'));
+//    arr['length'] = 1;
+//    console.log(arr);
+//    console.log(Object.keys(arr));
+
+    console.log(Object.getOwnPropertyDescriptors(arr));
+
+
+</script>
+
+
+<script type="text/html">
+
+    var obj = {name:'zs', age: 18};
+    obj['address'] = '上海';
+    console.log(Object.getOwnPropertyDescriptors(obj));
+
+
+
+    Object.defineProperty(obj,'age2',{
+//        enumerable: false,
+        value: 66666
+//        writable: false
+    })
+
+    console.log(Object.getOwnPropertyDescriptors(obj));
+
+    for(var key in obj) {
+        console.log(key, obj[key]);
+    }
+
+    obj.age = 7777;
+    obj.age = 7777;
+    obj.age = 88;
+    console.log(obj);
+
+</script>
+
+
+<script type="text/html">
+
+    var obj = {name:'sz', age: 18};
+    obj['address'] = '上海';
+    // 批量的设置属性的描述器  {可配置,value, 枚举...}
+    Object.defineProperties(obj,{
+        'name': {
+            writable:true,
+            value:"szz",
+            enumerable:false,
+            configurable:true
+        },
+        'address': {
+            writable:false,
+            value:"北京",
+            enumerable:false,
+            configurable:true
+        }
+
+    })
+
+
+    console.log(Object.getOwnPropertyDescriptors(obj));
+
+    obj.name = 'xxxxx';
+    obj.address = 'xxxxx';
+    console.log(obj);
+
+</script>
+
+<script type="text/html">
+    function Person() {
+
+    }
+
+
+    var p = new Person();
+
+//    Person.prototype
+//    p.__proto__
+
+    console.log(Object.getPrototypeOf(p));
+    console.log(Object.getPrototypeOf(p) === Person.prototype);
+
+</script>
+
+
+<script type="text/html">
+//    function Person(name) {
+//        this.name = name;
+//    }
+
+
+    var obj = {name: 'sz', age: 18};
+
+//    function F() {};
+//    F.prototype = obj;
+//    var newObj = new F();
+ var newObj = Object.create(obj);
+
+console.log(newObj);
+console.log(newObj.name);
+console.log(newObj.age);
+
+
+function createObj(sourceObj) {
+    if (typeof Object.create === 'function') {
+        return Object.create(sourceObj);
+    }else {
+        function F() {};
+        F.prototype = sourceObj;
+        var newObj = new F();
+        return newObj;
+    }
+}
+
+
+</script>
+
+<script type="text/html">
+
+    var obj0 = {address: '上海'};
+    var obj1 = {name: 'sz'};
+    Object.setPrototypeOf(obj1, obj0);
+    console.log(obj1);
+
+
+</script>
+
+
+<script type="text/html">
+    // 严格模式
+//    'use strict';
+
+//    var num = 10;
+    num = 10;
+    console.log(num);
+    var obj = {name: 'sz', age: 18};
+    console.log(Object.isExtensible(obj));
+
+
+    Object.preventExtensions(obj);
+
+    console.log(Object.getOwnPropertyDescriptors(obj));
+
+
+    console.log(Object.isExtensible(obj));
+
+    obj.address = '上海';
+
+    obj.name = 'xxxx';
+    delete obj.age;
+    console.log(obj);
+
+
+</script>
+
+<script type="text/html">
+
+    var obj = {name: 'sz', age: 18};
+
+    console.log(Object.isSealed(obj));
+    Object.seal(obj);
+    console.log(Object.getOwnPropertyDescriptors(obj));
+
+    console.log(Object.isSealed(obj));
+
+    // 密封对象
+//    Object.seal(obj);
+//    delete obj.name;
+//    obj.address = '北京';
+//    obj.age = 666;
+//    console.log(obj);
+
+
+</script>
+
+
+<script>
+
+    var obj = {name: 'sz', age: 18};
+    console.log(Object.isFrozen(obj));
+    Object.freeze(obj);
+    console.log(Object.isFrozen(obj));
+
+    console.log(Object.getOwnPropertyDescriptors(obj));
+
+
+
+    obj.address = 'xxx';
+    obj.age = 666;
+    delete obj.name;
+
+    console.log(obj);
+
+
+//    var tmp = obj;
+    var tmp = {name: 'sz', age: 18};
+    tmp.address = 'xxx';
+    tmp.age = 666;
+    delete tmp.name;
+    console.log(tmp);
+
+
+</script>
+
+</body>
+</html>

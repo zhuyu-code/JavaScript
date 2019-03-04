@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+</head>
+<body>
+<!--
+  常见的闭包使用形式?
+	1. 将函数作为另一个函数的返回值
+	2. 将函数的形参作为实参传递给另一个函数调用
+-->
+<script type="text/javascript">
+    // 1. 将函数作为另一个函数的返回值
+    function fn1() {
+        var num = 10;
+        function fn2() {
+            num++;
+            console.log(num);
+        }
+        return fn2;
+    }
+
+    // 直接调用, 没有意义
+    // fn1();
+
+    // 通过全局变量引用, 保住了内部函数fn2的命
+    var f = fn1();
+    f(); // 11  在外部函数执行完成后, 还可以执行内部函数
+    f(); // 12
+
+    // 2. 将函数的形参作为实参传递给另一个函数调用
+     function logMsgDelay(msg, time) {
+       setTimeout(function () {
+         console.log(msg);
+       }, time)
+     }
+     logMsgDelay('撩课学院', 2000);
+</script>
+</body>
+</html>

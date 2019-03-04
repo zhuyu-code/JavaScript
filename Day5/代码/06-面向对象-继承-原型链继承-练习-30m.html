@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<!--Animal-->
+<script>
+    function Animal(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    Animal.prototype.eat = function () {
+        console.log('吃');
+    };
+
+    Animal.prototype.run = function () {
+        console.log('跑');
+    }
+</script>
+<!--Person-->
+<script>
+    function Person(job) {
+        this.job = job;
+    }
+
+    Person.prototype.jump = function () {
+        console.log('跳');
+    };
+</script>
+<!--Student-->
+<script>
+    function Student(className) {
+        this.className = className;
+    }
+
+    Student.prototype.study = function () {
+        console.log('学习');
+    }
+</script>
+</body>
+</html>

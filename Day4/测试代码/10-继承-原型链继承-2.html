@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>05-继承-原型链继承-2</title>
+</head>
+<body>
+
+<script>
+
+    /**
+     * 构造函数Person
+     */
+    function Person() {
+        this.name = '撩课学院';
+        this.pets = ['小煤球', 'Python'];
+    }
+    Person.prototype.run = function () {
+        console.log('跑');
+    };
+
+    /**
+     * 构造函数Student
+     */
+    function Stu() {
+        this.num = 'itlike.com';
+    }
+
+
+    // 1. 构造父类的实例
+    var p = new Person();
+    // 2. 并设置为子类的原型对象
+    Stu.prototype = p;
+
+    // 3. 全部都继承
+    var stu = new Stu();
+    console.log(stu);
+    console.log(stu.num);
+
+    console.log(stu.name);
+    console.log(stu.pets);
+    stu.run();
+
+    // 4. 类型存在问题
+    console.log(stu.constructor.name); // Person
+</script>
+
+
+</body>
+</html>

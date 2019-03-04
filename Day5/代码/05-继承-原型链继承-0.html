@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    /**
+     * 构造函数Person
+     * @constructor
+     */
+    function Person(name, pets) {
+       this.name = name;
+       this.pets = pets;
+    }
+
+    Person.prototype.run = function () {
+        console.log('跑');
+    };
+
+
+    /**
+     * 构造函数Student
+     * @constructor
+     */
+    function Student(num, name, pets) {
+        // 注意: 一定要放在最前面
+        Person.call(this, name, pets);
+        this.num = num;
+    }
+
+    // 1. 寄生式继承
+    function Temp() {}
+    Temp.prototype = Person.prototype;
+    var stuPrototype = new Temp();
+    Student.prototype = stuPrototype;
+    stuPrototype.constructor = Student;
+
+
+</script>
+<script>
+    var stu = new Student('001', '张三', ['小花']);
+    var stu2 = new Student('002', '李四', ['小茂']);
+    console.log(stu);
+    console.log(stu2);
+</script>
+</body>
+</html>

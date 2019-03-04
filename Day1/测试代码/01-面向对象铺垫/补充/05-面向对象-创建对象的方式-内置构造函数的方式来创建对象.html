@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>内置构造函数的方式来创建对象</title>
+</head>
+<body>
+
+<script>
+
+//    <!--代码的复用性差, 代码的冗余度高-->
+    var p1 = new Object();
+    p1.name = 'sz';
+    p1.run = function () {
+        console.log(this.name + 'pao');
+    }
+
+
+    var p2 = new Object();
+    p2.name = 'zs';
+    p2.run = function () {
+        console.log(this.name + 'pao');
+    }
+
+
+
+    console.log(p1.name);
+    p1.run();
+    console.log(p2.name);
+    p2.run();
+
+
+</script>
+
+</body>
+</html>

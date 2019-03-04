@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义构造函数的方式来创建对象</title>
+</head>
+<body>
+
+<script type="text/html">
+
+    function createObject(name, run) {
+        var p = new Object();
+        p.name = name;
+        p.run = run;
+        return p;
+    }
+
+
+</script>
+
+<script type="text/html">
+// 函数: 普通函数, 闭包 匿名函数 命名函数; 方法 -> 宿主(静态方法, 实例方法)
+// 构造函数: 肯定是一个函数; 函数的作用: 是让别人可以通过这个函数, 构造一个对象
+
+
+
+    // 自定义, 构造函数
+    function Person(name, run) {
+        // this: 一般情况下, 如果直接调用这个, this, 就代表调用者
+        // 如果外界, 以构造函数的方式, 进行调用, 那么this, 就代表, 系统自动构造的对象
+
+//        var p = new Object();
+        this.name = name;
+        this.age = run;
+//        return p;
+    }
+
+    Person();
+
+//    var arr = new Array(1,2,3);
+    var p = new Person('sz', 18);
+    console.log(p);
+    console.log(typeof p);
+    console.log(p.constructor.name);
+
+
+    // 构造函数内部的执行步骤
+//function Person(name, age, runFunc) {
+//    // 1. 自动的创建一个空的对象, 并且, 把这个对象的地址, 给this -> 新对象
+////        var this = new Object();
+//
+//    // 2. 可以通过this, 给新的空对象, 进性添加属性, 或者方法(我们来做的事情)
+//    this.name = name;
+//    this.age = age;
+//    this.run = runFunc;
+//
+//    // 3. 返回这个最新创建的对象
+////        return p;
+//}
+
+
+
+</script>
+
+<script>
+
+
+    // 关于构造函数的额返回值
+    // 1. 如果不写, -> 直接返回默认创建的新对象
+    // 2. 如果返回this -> 直接返回默认创建的新对象
+    // 3. 如果返回的是基本数据类型: 直接返回默认创建的新对象
+    // 4. 如果返回到是对象 -> 直接把这个对象, 返回给外界, 外界接受到的就是这个函数内部返回的对象
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+//        return this;
+        return [1,2,3];
+    }
+
+    // 类型匹配才接受-> 对象
+    var p = new Person('sz', 18);
+    console.log(p);
+
+
+</script>
+
+
+
+</body>
+</html>

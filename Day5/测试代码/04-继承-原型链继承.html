@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    function Person(name, pets) {
+        this.name = name;
+        this.pets = pets;
+    }
+
+    Person.prototype.run = function () {
+        console.log('跑');
+    };
+
+    function Student(num, name, pets) {
+        Person.call(this, name, pets);
+        this.num = num;
+    }
+
+    // 1.原型式继承
+    function Tmp() {
+    }
+
+    Tmp.prototype = Person.prototype;
+    var stuPro = new Tmp();
+    // 增强动作
+    stuPro.constructor = Student;
+    // 原型链继承
+    Student.prototype = stuPro;
+
+    // 寄生式组合继承 = 寄生式(原型式继承+对象增加) + 原型链 + 借助构造函数继承
+    //  = 寄生式(原型式继承+对象增加) + 组合式继承(原型链 + 借助构造函数继承)
+    // = 寄生式组合继承
+
+</script>
+<script>
+    /*var stu = new Student('001', 'sz', ['小花']);
+    console.log(stu);
+    stu.run();
+
+    var stu2 = new Student('002','王二小', ['土豆']);
+    console.log(stu2);
+    stu2.run();*/
+</script>
+
+<!--
+原型式继承
+	借助原型,然后基于已有的对象, 创建出新对象;同时不需要创建自定义类型
+	核心
+
+-->
+<script>
+    /*
+    function createObjWithObj(obj) {
+        function Tmp() {}
+        Tmp.prototype = obj;
+        var o = new Tmp();
+        return o;
+    }
+    */
+
+
+    var obj = {name: '张三', age: 18};
+
+    function Tmp() {}
+
+    Tmp.prototype = obj;
+    var o = new Tmp();
+
+    console.log(o);
+
+
+</script>
+
+
+<!--
+寄生式继承
+-->
+<script>
+
+    function createObjWithObj(obj) {
+        function Tmp() {}
+        Tmp.prototype = obj;
+        return new Tmp();
+    }
+
+    function createNewObjWithObj(obj) {
+        // 1. 通过另外一个对象创建出一个新对象
+        var o = createObjWithObj(obj);
+        // 2. 增强对象
+        o.name = 'sz';
+        o.age = 18;
+        // 3. 返回对象
+        return o;
+    }
+</script>
+</body>
+</html>

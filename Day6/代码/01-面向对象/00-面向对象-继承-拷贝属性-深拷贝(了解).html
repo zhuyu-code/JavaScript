@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>00-面向对象-继承-拷贝属性-深拷贝(了解)</title>
+</head>
+<body>
+
+<script>
+    // 1. 要拷贝的对象
+    var obj = {
+        name: '撩课',
+        age: 18,
+        friends: ['小花', '小黑'],
+        goodF: {
+            name: '小撩',
+            age: 19,
+            address: '上海',
+            pets: [
+                {name: '土豆'},
+                {name: '马铃薯'}
+                ]
+        },
+        bir: new Date()
+    };
+
+/**
+ *  深拷贝
+ * @param {object}fromObj 拷贝的对象
+ * @param {object}toObj  目标对象
+ */
+function deepCopyObj2NewObj(fromObj, toObj) {
+   for(var key in fromObj){
+       // 1. 取出键值对
+       var fromValue = fromObj[key];
+       // 2. 检查当前的属性值是什么类型
+       if(!isObj(fromValue)){ // 如果是值类型，那么就直接拷贝赋值
+           toObj[key] = fromValue;
+       }else {
+           // 如果是引用类型，
+           // 那么就再调用一次这个方法，
+           // 去内部拷贝这个对象的所有属性
+           var tempObj = new fromValue.constructor;
+           console.log(fromValue.constructor);
+           deepCopyObj2NewObj(fromValue, tempObj);
+           toObj[key] = tempObj;
+       }
+   }
+}
+
+/**
+ * 辅助函数, 判断是否是对象
+ * @param {object}obj
+ * @returns {boolean}
+ */
+function isObj(obj) {
+  return obj instanceof Object;
+}
+
+    /**
+     * 辅助函数, 判断是否是对象
+     * @param obj
+     * @returns {boolean}
+     */
+    function isArray(obj) {
+       // return Array.isArray(obj);
+        return Object.prototype.toString.call(obj) === '[object Array]'
+    }
+
+</script>
+<script>
+    var newObj = {};
+    deepCopyObj2NewObj(obj, newObj);
+    obj.goodF.pets[0]['size'] = '200px';
+
+    console.log(obj);
+    console.log(newObj);
+</script>
+
+<script>
+Array.prototype.unique1 = function() {
+    // 1. 定义数组
+    var temp = [];
+    // 2. 遍历当前数组
+    for(var i = 0; i < this.length; i++) {
+        // 3.如果当前数组的第i已经保存进了临时数组，
+        // 那么跳过,否则把当前项push到临时数组里面
+        if (-1 === temp.indexOf(this[i])) {
+            temp.push(this[i]);
+        }
+    }
+    return temp;
+};
+
+Array.prototype.unique2 = function() {
+    //1. hash为hash表，r为临时数组
+    var hash = {}, temp=[];
+    // 2.遍历当前数组
+    for(var i = 0; i < this.length; i++)
+    {
+        // 3. 如果hash表中没有当前项
+        if (!hash[this[i]])
+        {
+            // 4.存入hash表
+            hash[this[i]] = true;
+            // 5.把当前数组的当前项push到临时数组里面
+            temp.push(this[i]);
+        }
+    }
+    return temp;
+};
+
+Array.prototype.unique3 = function() {
+    var n = [this[0]];
+    for(var i = 1; i < this.length; i++){
+        if (this.indexOf(this[i]) === i) {
+            n.push(this[i]);
+        }
+    }
+    return n;
+};
+
+Array.prototype.unique4 = function() {
+    this.sort();
+    var re=[this[0]];
+    for(var i = 1; i < this.length; i++)
+    {
+        if( this[i] !== re[re.length-1])
+        {
+            re.push(this[i]);
+        }
+    }
+    return re;
+};
+
+Array.prototype.unique = Array.prototype.unique || function () {
+    return [...new Set(this)];
+};
+
+var arr = [1, 2, 3, 2, 4, 8, 8];
+console.log(arr.unique1());
+console.log(arr.unique2());
+console.log(arr.unique3());
+console.log(arr.unique4());
+
+
+</script>
+<script>
+function clickHandler(){
+  $(this).unbind('click', clickHandler);
+    $.ajax({
+        url : 'url',
+        dataType : 'json',
+        type : 'post',
+        success : function (data) {
+            if (data.success) {
+                //提交成功做跳转处理
+            } else {
+                //处理失败，重新绑定点击事件
+                alert(data.message);
+                $(self).click(clickHandler);
+            }
+        }
+  });
+}
+
+</script>
+</body>
+</html>
+

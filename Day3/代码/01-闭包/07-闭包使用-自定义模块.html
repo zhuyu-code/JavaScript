@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<!--
+ 8. 闭包的应用-定义JS模块
+	将所有的数据和功能都封装在一个函数内部(私有的)
+	只向外暴露一个包含多个方法的对象或函数
+	模块的使用者, 只需要通过模块暴露的对象调用方法来实现对应的功能
+-->
+<script type="text/html">
+    (function () {
+        var str = '张三';
+        console.log(str);
+    })();
+
+    (function () {
+        var str = '王五';
+        console.log(str);
+    })();
+
+
+    (function (document) {
+        document.getElementById()
+    })(document);
+
+    (function (window) {
+        (function (window) {
+            (function (window) {
+                
+            })(window);
+        })(window);  
+    })(window);
+    
+    (function (w) {
+        
+    })(window);
+</script>
+<script src="js/MyTool1.js"></script>
+<script>
+    (function () {
+        // console.log(window);
+        console.log(window.myTool, myTool);
+        myTool.get();
+        myTool.send();
+
+        var str = 'zhangsan';
+        console.log(str);
+        console.log(window.str);
+    })();
+</script>
+</body>
+</html>

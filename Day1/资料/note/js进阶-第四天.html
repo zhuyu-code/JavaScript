@@ -1,0 +1,446 @@
+<!DOCTYPE HTML>
+<html lang="en" >
+    
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>js进阶-第四天 | JS进阶-网页特效</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 2.6.7">
+        
+        
+        <meta name="HandheldFriendly" content="true"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+        <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+        
+    <link rel="stylesheet" href="gitbook/style.css">
+    
+        
+        <link rel="stylesheet" href="gitbook/plugins/gitbook-plugin-highlight/website.css">
+        
+    
+        
+        <link rel="stylesheet" href="gitbook/plugins/gitbook-plugin-search/search.css">
+        
+    
+        
+        <link rel="stylesheet" href="gitbook/plugins/gitbook-plugin-fontsettings/website.css">
+        
+    
+    
+        <link rel="stylesheet" href="./styles/website.css">
+    
+
+        
+    
+    
+    <link rel="next" href="./js进阶-第五天.html" />
+    
+    
+    <link rel="prev" href="./js进阶-第三天.html" />
+    
+
+        
+    </head>
+    <body>
+        
+        
+    <div class="book"
+        data-level="4"
+        data-chapter-title="js进阶-第四天"
+        data-filepath="js进阶-第四天.md"
+        data-basepath="."
+        data-revision="Tue Dec 20 2016 07:57:49 GMT+0800 (CST)"
+        data-innerlanguage="">
+    
+
+<div class="book-summary">
+    <nav role="navigation">
+        <ul class="summary">
+            
+            
+            
+            
+
+            
+
+            
+    
+        <li class="chapter " data-level="0" data-path="index.html">
+            
+                
+                    <a href="./index.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                        JS进阶-开篇
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="1" data-path="chapter1.html">
+            
+                
+                    <a href="./chapter1.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>1.</b>
+                        
+                        js进阶-第一天
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="2" data-path="js进阶-第二天.html">
+            
+                
+                    <a href="./js进阶-第二天.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>2.</b>
+                        
+                        js进阶-第二天
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="3" data-path="js进阶-第三天.html">
+            
+                
+                    <a href="./js进阶-第三天.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>3.</b>
+                        
+                        js进阶-第三天
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter active" data-level="4" data-path="js进阶-第四天.html">
+            
+                
+                    <a href="./js进阶-第四天.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>4.</b>
+                        
+                        js进阶-第四天
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="5" data-path="js进阶-第五天.html">
+            
+                
+                    <a href="./js进阶-第五天.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>5.</b>
+                        
+                        js进阶-第五天
+                    </a>
+            
+            
+        </li>
+    
+        <li class="chapter " data-level="6" data-path="js进阶-第六天.html">
+            
+                
+                    <a href="./js进阶-第六天.html">
+                
+                        <i class="fa fa-check"></i>
+                        
+                            <b>6.</b>
+                        
+                        js进阶-第六天
+                    </a>
+            
+            
+        </li>
+    
+
+
+            
+            <li class="divider"></li>
+            <li>
+                <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+                    Published with GitBook
+                </a>
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+
+    <div class="book-body">
+        <div class="body-inner">
+            <div class="book-header" role="navigation">
+    <!-- Actions Left -->
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="./" >JS进阶-网页特效</a>
+    </h1>
+</div>
+
+            <div class="page-wrapper" tabindex="-1" role="main">
+                <div class="page-inner">
+                
+                
+                    <section class="normal" id="section-">
+                    
+                        <h1 id="js&#x7279;&#x6548;--day4">js&#x7279;&#x6548; - Day4</h1>
+<h2 id="&#x4E00;&#x3001;math&#x5E38;&#x7528;&#x51FD;&#x6570;">&#x4E00;&#x3001;Math&#x5E38;&#x7528;&#x51FD;&#x6570;</h2>
+<ul>
+<li><p><strong>Math.ceil()   &#x5411;&#x4E0A;&#x53D6;&#x6574; &#x5929;&#x82B1;&#x677F; </strong></p>
+<blockquote>
+<p>Math.ceil(1.11)   &#x7ED3;&#x679C; &#x662F; 2</p>
+<p>Math.ceil(1.99)   &#x7ED3;&#x679C; &#x662F; 2</p>
+<p>Math.ceil(-1.5)    &#x7ED3;&#x679C; &#x662F; -1</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><p><strong>Math.floor()  &#x5411;&#x4E0B;&#x53D6;&#x6574; &#x5730;&#x677F; </strong></p>
+<blockquote>
+<p>Math.floor(1.11) &#x7ED3;&#x679C; &#x662F; 1</p>
+<p>Math.floor(1.99) &#x7ED3;&#x679C; &#x662F; 1</p>
+<p>Math.floor(-1.2) &#x7ED3;&#x679C; &#x662F; -2</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><p><strong>Math.round()  &#x56DB;&#x820D;&#x4E94;&#x5165;</strong></p>
+<blockquote>
+<p>Math.round(1.11) &#x7ED3;&#x679C; &#x662F; 1</p>
+<p>Math.round(1.99) &#x7ED3;&#x679C; &#x662F; 2</p>
+<p>Math.round(-1.2) &#x7ED3;&#x679C; &#x662F; -2</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="&#x4E8C;&#x3001;&#x7F13;&#x52A8;&#x52A8;&#x753B;&#x539F;&#x7406;">&#x4E8C;&#x3001;&#x7F13;&#x52A8;&#x52A8;&#x753B;&#x539F;&#x7406;</h3>
+<ul>
+<li><p>&#x7F13;&#x52A8;&#x52A8;&#x753B;&#x7684;&#x539F;&#x7406;:<strong>  &#x76D2;&#x5B50;&#x672C;&#x8EAB;&#x7684;&#x4F4D;&#x7F6E; + &#x6B65;&#x957F; (&#x4E0D;&#x65AD;&#x53D8;&#x5316;&#x7684;&#xFF0C;&#x7531;&#x5927;&#x53D8;&#x5C0F;)</strong></p>
+</li>
+<li><p>&#x6B65;&#x957F;&#xFF1A;<strong>begin = begin + (end - begin) \/ &#x7F13;&#x52A8;&#x7CFB;&#x6570;  </strong></p>
+</li>
+<li><p>&#x57FA;&#x672C;&#x7684;&#x7F13;&#x52A8;&#x52A8;&#x753B;&#x51FD;&#x6570;&#xFF1A;</p>
+<pre><code>// &#x7F13;&#x52A8;&#x52A8;&#x753B;
+// &#x8C01;  &#x76EE;&#x6807;
+function buffer(obj, target) {  
+    // 1. &#x6E05;&#x9664;&#x5B9A;&#x65F6;&#x5668;    
+    clearInterval(obj.timer);    
+    // 2. &#x8BBE;&#x7F6E;&#x5B9A;&#x65F6;&#x5668;    
+    obj.timer = setInterval(function () {        
+           // 2.1 &#x6C42;&#x51FA;&#x6B65;&#x957F;        
+           var speed = (target - obj.offsetLeft) / 20;        
+           console.log(speed);        
+           speed = speed &gt; 0 ? Math.ceil(speed): Math.floor(speed);        
+           console.log(speed);        
+           // 2.2 &#x8BBE;&#x7F6E;&#x52A8;&#x753B;        
+           obj.style.left = obj.offsetLeft + speed + &apos;px&apos;;        
+           obj.innerHTML = obj.offsetLeft;        
+           // 2.3 &#x6E05;&#x9664;&#x5B9A;&#x65F6;&#x5668;        
+           if(obj.offsetLeft == target){           
+                  clearInterval(obj.timer);        
+            }    
+            }, 20);
+}
+</code></pre></li>
+</ul>
+<h3 id="21--&#x5E38;&#x89C1;&#x7684;-js&#x8BBF;&#x95EE;-css-&#x5C5E;&#x6027;">2.1  &#x5E38;&#x89C1;&#x7684; js&#x8BBF;&#x95EE; CSS &#x5C5E;&#x6027;</h3>
+<ul>
+<li><p>&#x5728;&#x5F00;&#x53D1;&#x4E2D;&#xFF0C;&#x8BBF;&#x95EE;&#x5F97;&#x5230;css &#x5C5E;&#x6027;&#xFF0C;&#x6BD4;&#x8F83;&#x5E38;&#x7528;&#x7684;&#x6709;&#x4E24;&#x79CD;&#xFF1A;</p>
+</li>
+<li><ul>
+<li><p>&#x70B9;&#x8BED;&#x6CD5;</p>
+<p><strong>box.style.width&#xFF0C;box.style.height&#xFF0C;box.style.top&#xFF0C;box.style.left</strong>
+&#x5F97;&#x5230;&#x5E26;&#x6709;&#x5355;&#x4F4D;&#x7684;&#x5C5E;&#x6027;&#x503C;&#xFF0C;&#x6BD4;&#x5982;&#xFF1A;200px&#xFF1B;
+&#x4F46;&#x662F;&#xFF0C;&#x70B9;&#x8BED;&#x6CD5;&#x5B58;&#x5728;&#x4E00;&#x4E2A;&#x5F88;&#x81F4;&#x547D;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x8DDF;&#x5728;style&#x540E;&#x9762;&#x7684;&#x5C5E;&#x6027;&#x4E0D;&#x80FD;&#x7531;&#x5916;&#x9762;&#x4F20;&#x5165;</p>
+<pre><code>var h = &apos;height&apos;; 
+box.style.h = 300 + &apos;px&apos;;
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><ul>
+<li>&#x4E0B;&#x6807;&#x8BED;&#x6CD5;</li>
+</ul>
+<p><strong>      &#x5229;&#x7528; [] &#x8BBF;&#x95EE;&#x5C5E;&#x6027;        &#x5143;&#x7D20;.style[&#x201C;&#x5C5E;&#x6027;&#x201D;]; </strong></p>
+<pre><code>  &#x8FD9;&#x79CD;&#x8BED;&#x6CD5;&#x7684;&#x597D;&#x5904;&#x5C31;&#x662F;&#x53EF;&#x4EE5;&#x52A8;&#x6001;&#x7684;&#x4F20;&#x9012;&#x53C2;&#x6570;&#x4F5C;&#x4E3A;&#x5C5E;&#x6027;
+</code></pre><pre><code>     var h = &apos;height&apos;;
+     box.style[h] = 300 + &apos;px&apos;;
+</code></pre></li>
+</ul>
+<h3 id="22---js&#x83B7;&#x53D6;css&#x7684;&#x6837;&#x5F0F;"><strong>2.2   JS&#x83B7;&#x53D6;CSS&#x7684;&#x6837;&#x5F0F;</strong></h3>
+<blockquote>
+<p>&#x5728;&#x5F00;&#x53D1;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x60F3;&#x8981;&#x83B7;&#x5F97;css &#x7684;&#x6837;&#x5F0F;&#xFF0C;&#x901A;&#x5E38;&#x91C7;&#x7528;&#xFF1A;box.style.top &#xFF0C;box.style.backgorundColor&#x7B49;&#xFF0C; &#x4F46;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x53EA;&#x80FD;&#x5F97;&#x5230; &#x884C;&#x5185;&#x6837;&#x5F0F;&#xFF0C;&#x800C;&#x5E73;&#x5E38;&#x7528;&#x7684;&#x6700;&#x591A;&#x7684;&#x662F;&#x9875;&#x5185;&#x6837;&#x5F0F;&#x6216;&#x8005;&#x5916;&#x90E8;&#x6837;&#x5F0F;&#xFF0C; &#x90A3;&#x6211;&#x4EEC;&#x5982;&#x4F55;&#x89E3;&#x51B3;&#x8FD9;&#x6837;&#x7684;&#x95EE;&#x9898;&#xFF1F;</p>
+</blockquote>
+<ul>
+<li><ul>
+<li><p>&#x5728;IE&#x548C;Opera&#x6D4F;&#x89C8;&#x5668;</p>
+<p><strong>obj.currentStyle </strong></p>
+</li>
+<li><p>&#x5176;&#x4ED6;W3C&#x6807;&#x51C6;&#x6D4F;&#x89C8;&#x5668;</p>
+<p><strong>window.getComputedStyle(&quot;&#x5143;&#x7D20;&quot;, &quot;&#x4F2A;&#x7C7B;&quot;)   </strong> &#xFF08; &#x6CE8;&#x610F;&#xFF1A;&#x4E24;&#x4E2A;&#x9009;&#x9879;&#x662F;&#x5FC5;&#x987B;&#x7684;&#xFF0C; &#x6CA1;&#x6709;&#x4F2A;&#x7C7B; &#x7528; <strong>null </strong>&#x66FF;&#x4EE3; &#xFF09;</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><ul>
+<li>&#x517C;&#x5BB9;&#x5199;&#x6CD5;<pre><code>function getStyleAttr(obj, attr) {    
+    if(obj.currentStyle){ // IE &#x548C; opera        
+         return obj.currentStyle[attr];    
+    }else {        
+         return window.getComputedStyle(obj, null)[attr]; 
+    }
+}
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<h3 id="23--json-&#x904D;&#x5386;">2.3  JSON &#x904D;&#x5386;</h3>
+<ul>
+<li><p>for in &#x5173;&#x952E;&#x5B57;</p>
+<p>for ( &#x53D8;&#x91CF; in &#x5BF9;&#x8C61;) { &#x6267;&#x884C;&#x8BED;&#x53E5;; }</p>
+<pre><code>for(var k in json){   
+   console.log(k); // key    
+   console.log(json[k]); // value
+}
+</code></pre></li>
+</ul>
+<h3 id="24-&#x56DE;&#x8C03;&#x51FD;&#x6570;">2.4 &#x56DE;&#x8C03;&#x51FD;&#x6570;</h3>
+<p>&#x5728;&#x5F00;&#x53D1;&#x4E2D;&#xFF0C;&#x6709;&#x5F88;&#x591A;&#x64CD;&#x4F5C;&#x662F;&#x94FE;&#x5F0F;&#x7684;&#xFF0C;&#x4E0B;&#x4E00;&#x4E2A;&#x64CD;&#x4F5C;&#x63A5;&#x7740;&#x4E0A;&#x4E00;&#x4E2A;&#x64CD;&#x4F5C;&#x6267;&#x884C;&#xFF0C;&#x90A3;&#x4E48;&#x5982;&#x4F55;&#x5B9E;&#x73B0;&#x8FD9;&#x6837;&#x7684;&#x884C;&#x4E3A;&#xFF1F;<strong> &#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;</strong></p>
+<pre><code>   &#x56DE;&#x8C03;&#x51FD;&#x6570;&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x8C03;&#x7528;? 
+  --&gt; &#x52A8;&#x753B;&#x7ED3;&#x675F;&#x7684;&#x65F6;&#x5019;&#x8C03;&#x7528; ? 
+  --&gt; &#x52A8;&#x753B;&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x7ED3;&#x675F;? 
+  ---&gt; &#x5B9A;&#x65F6;&#x5668;&#x88AB;&#x6E05;&#x9664;&#x7684;&#x65F6;&#x5019;
+  --&gt; &#x5B9A;&#x65F6;&#x5668;&#x88AB;&#x6E05;&#x9664;&#x65F6;&#x8C03;&#x7528;&#x56DE;&#x8C03;&#x51FD;&#x6570;
+</code></pre><h3 id="25-&#x5B8C;&#x6574;&#x7248;&#x7F13;&#x52A8;&#x52A8;&#x753B;">2.5 &#x5B8C;&#x6574;&#x7248;&#x7F13;&#x52A8;&#x52A8;&#x753B;</h3>
+<pre><code>  /* 
+   * &#x7F13;&#x52A8;&#x52A8;&#x753B; 
+   * obj: &#x8981;&#x505A;&#x52A8;&#x753B;&#x7684;&#x5143;&#x7D20; 
+   * json: &#x8981;&#x505A;&#x52A8;&#x753B;&#x7684;&#x5C5E;&#x6027;&#x952E;&#x503C;&#x5BF9;
+   * fn: &#x56DE;&#x8C03;&#x51FD;&#x6570; 
+  */ 
+  function Buffer(obj, json, fn) {     
+      // 1. &#x6E05;&#x9664;&#x5B9A;&#x65F6;&#x5668;     
+      clearInterval(obj.timer);     
+      // 2. &#x8BBE;&#x7F6E;&#x5B9A;&#x65F6;&#x5668;     
+      var flag = true, begin, target;
+      obj.timer = setInterval(function () {         
+          // 2.1 &#x904D;&#x5386;json         
+          for(var k in json){             
+             // 2.1.1 &#x83B7;&#x53D6;&#x505A;&#x52A8;&#x753B;&#x5C5E;&#x6027;&#x7684;&#x521D;&#x59CB;&#x503C;            
+             if(&apos;opacity&apos; == k){ // &#x900F;&#x660E;&#x5EA6;               
+                begin = parseInt(parseFloat(getCssStyleAttr(obj, k)) *100) || 0;  
+                target = parseInt(parseFloat(json[k])*100); 
+             }else { // &#x5176;&#x4ED6;&#x52A8;&#x753B;               
+                begin = parseInt(getCssStyleAttr(obj, k));   
+                target = parseInt(json[k]);    
+             }             
+             // 2.1.2 &#x83B7;&#x53D6;&#x52A8;&#x753B;&#x7684;&#x6B65;&#x957F;      
+             var speed = (target - begin) / 20;
+             speed = speed &gt; 0 ? Math.ceil(speed) : Math.floor(speed);
+             // 2.1.3 &#x8BBE;&#x7F6E;&#x7F13;&#x52A8;&#x52A8;&#x753B;
+             if(&apos;opacity&apos; == k ){ // &#x900F;&#x660E;&#x5EA6;
+                   obj.style.opacity = (begin + speed) / 100;
+                   obj.style.filter = &apos;alpha(opacity=&apos;+ (begin + speed) +&apos;)&apos;;
+             }else if(&apos;zIndex&apos; == k){
+                   obj.style.zIndex = json[k];
+            }else { // &#x5176;&#x4ED6;&#x60C5;&#x51B5; 
+                  obj.style[k] = begin + speed + &apos;px&apos;; 
+            }            
+            // 2.1.4 &#x5224;&#x65AD;&#x662F;&#x5426;&#x6E05;&#x9664;&#x5B9A;&#x65F6;&#x5668;
+            flag = (begin != target) ? false : true;
+           }         
+           // 2.2 &#x6E05;&#x9664;&#x5B9A;&#x65F6;&#x5668;
+           if(flag){
+               clearInterval(obj.timer);
+               //&#x5224;&#x65AD;
+               if(fn){
+                   fn(); // &#x6267;&#x884C;&#x51FD;&#x6570;
+               }
+           }
+       }, 20); 
+  }
+
+  function $(id) {
+      return document.getElementById(id);
+  }
+
+  function getCssStyleAttr(obj, attr) {
+      if(obj.currentStyle){
+          return obj.currentStyle[attr];
+      }else {
+          return window.getComputedStyle(obj, null)[attr];
+      }
+  }
+</code></pre>
+                    
+                    </section>
+                
+                
+                </div>
+            </div>
+        </div>
+
+        
+        <a href="./js进阶-第三天.html" class="navigation navigation-prev " aria-label="Previous page: js进阶-第三天"><i class="fa fa-angle-left"></i></a>
+        
+        
+        <a href="./js进阶-第五天.html" class="navigation navigation-next " aria-label="Next page: js进阶-第五天"><i class="fa fa-angle-right"></i></a>
+        
+    </div>
+</div>
+
+        
+<script src="gitbook/app.js"></script>
+
+    
+    <script src="gitbook/plugins/gitbook-plugin-search/lunr.min.js"></script>
+    
+
+    
+    <script src="gitbook/plugins/gitbook-plugin-search/search.js"></script>
+    
+
+    
+    <script src="gitbook/plugins/gitbook-plugin-sharing/buttons.js"></script>
+    
+
+    
+    <script src="gitbook/plugins/gitbook-plugin-fontsettings/buttons.js"></script>
+    
+
+<script>
+require(["gitbook"], function(gitbook) {
+    var config = {"highlight":{},"search":{"maxIndexSize":1000000},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2}};
+    gitbook.start(config);
+});
+</script>
+
+        
+    </body>
+    
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>03-面向对象-构造函数注意事项1</title>
+</head>
+<body>
+
+<!--
+01-构造函数设置属性和方法
+-->
+<script type="text/html">
+
+    // 注意: 以下的属性和方法, 都是绑定在使用构造函数创建出来的对象p上; 最终使用的时候也是使用对象p来进行访问;
+    // 我们把这种类型的属性和方法, 称为 实例属性/实例方法
+    function Person(name, age, doFunc) {
+        this.name = name;
+        this.age = age;
+        this.doFunc = doFunc;
+    }
+
+    var p1 = new Person('sz', 18, function () {
+        console.log('sz在上课');
+    });
+    var p2 = new Person('王二小', 18, function () {
+        console.log('王二小在放羊');
+    });
+
+    console.log(p1.name);
+    console.log(p1.age);
+    p1.doFunc();
+
+    console.log(p2.name);
+    console.log(p2.age);
+    p2.doFunc();
+</script>
+<script type="text/html">
+
+    // 静态属性, 静态方法
+    // 绑定在函数身上, 一定要注意: 函数本质也是一个对象, 既然是个对象, 那么就可以动态的添加属性和方法
+    // 只要函数存在, 那么绑定在它身上的属性和方法, 也会一直存在
+
+    // 想要记录总共创建了多少个人?
+    // 1. 设置一个全局的变量
+    var personCount = 0;
+    function Person(name, age, doFunc) {
+        this.name = name;
+        this.age = age;
+        this.doFunc = doFunc;
+        personCount++;
+    }
+
+    var p1 = new Person('sz', 18, function () {
+        console.log('sz在上课');
+    });
+    var p2 = new Person('王二小', 18, function () {
+        console.log('王二小在放羊');
+    });
+
+    console.log(p1.name);
+    console.log(p1.age);
+    p1.doFunc();
+
+    console.log(p2.name);
+    console.log(p2.age);
+    p2.doFunc();
+
+    // personCount  = 100;
+
+    console.log('总共创建了'+ personCount + '个人');
+
+</script>
+<script type="text/html">
+    // 静态属性, 静态方法
+    // 绑定在函数身上, 一定要注意: 函数本质也是一个对象, 既然是个对象, 那么就可以动态的添加属性和方法
+    // 只要函数存在, 那么绑定在它身上的属性和方法, 也会一直存在
+    // 想要记录总共创建了多少个人?
+
+    // 1. 设置一个全局的变量
+    function Person(name, age, doFunc) {
+        this.name = name;
+        this.age = age;
+        this.doFunc = doFunc;
+        if (!this.personCount) {
+            this.personCount = 0;
+        }
+        this.personCount++;
+    }
+
+    var p1 = new Person('sz', 18, function () {
+        console.log('sz在上课');
+    });
+    var p2 = new Person('王二小', 18, function () {
+        console.log('王二小在放羊');
+    });
+
+    console.log(p1.name);
+    console.log(p1.age);
+    p1.doFunc();
+
+    console.log(p2.name);
+    console.log(p2.age);
+    p2.doFunc();
+
+    // 问题, 每次创建, 都会产生新的对象, 都会在新的对象上绑定这个参数
+    console.log('总共创建了'+ p1.personCount + '个人');
+
+</script>
+<script type="text/html">
+    // 1. 设置一个全局的变量
+    function Person(name, age, doFunc) {
+        this.name = name;
+        this.age = age;
+        this.doFunc = doFunc;
+        if (!Person.personCount) {
+            Person.personCount = 0;
+        }
+        Person.personCount++;
+    }
+
+    Person.printPersonCount = function () {
+        console.log('总共创建了'+ Person.personCount + '个人');
+    };
+
+
+    var p1 = new Person('sz', 18, function () {
+        console.log('sz在上课');
+    });
+    var p2 = new Person('王二小', 18, function () {
+        console.log('王二小在放羊');
+    });
+
+    console.log(p1.name);
+    console.log(p1.age);
+    p1.doFunc();
+    console.log(p2.name);
+    console.log(p2.age);
+    p2.doFunc();
+
+    Person.printPersonCount();
+
+</script>
+
+<!--
+02-关于创建出来的对象类型获取
+-->
+<script type="text/html"  id="测试内置对象的类型">
+    var obj = {'name': 'zs'};
+    var arr = [1, 2, 3];
+    console.log(typeof obj);
+    console.log(obj.toString());
+
+    console.log(typeof arr); // 无法正确获取 object
+    console.log(arr.toString()); // 无法正确的获取类型 1,2,3
+    console.log(Object.prototype.toString.call(arr)); // [object Array]
+    console.log(arr.constructor.name);
+</script>
+<script type="text/html"  id="创建出来的对象类型获取">
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    function Dog(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    function Cat(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    var p = new Person('sz', 18);
+    var d = new Dog('小花', 19);
+    var c = new Cat('小猫', 16);
+
+    console.log(typeof p);
+    console.log(typeof d);
+    console.log(typeof c);
+
+
+    // [object Object]
+    console.log(p.toString());
+    console.log(d.toString());
+    console.log(c.toString());
+
+    // [object Object]
+    console.log(Object.prototype.toString.call(p));
+    console.log(Object.prototype.toString.call(d));
+    console.log(Object.prototype.toString.call(c));
+
+    // 原因: 因为在自定义构造函数内部, 其实系统就是创建了一个空的对象, 赋值给this, 类型与
+    // var this = new Object();
+    // 所以, 所有打印出来的对象类型 都和 Object 打印出来的一致
+
+    console.log(p.constructor.name);
+    console.log(d.constructor.name);
+    console.log(c.constructor.name);
+</script>
+
+<!--
+03-关于创建出来的对象类型验证-对象中的构造器属性
+-->
+<script>
+    function Person(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    function Dog(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    function Cat(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    var p = new Person('sz', 18);
+    var d = new Dog('小花', 19);
+    var c = new Cat('小猫', 16);
+
+    console.log(p instanceof Person);
+    console.log(d instanceof Dog);
+    console.log(c instanceof Cat);
+
+    console.log(p instanceof Object);
+    console.log(d instanceof Object);
+    console.log(c instanceof Object);
+
+    console.log(p instanceof Dog);
+    console.log(d instanceof Cat);
+    console.log(c instanceof Person);
+
+    console.log(p);
+    console.log(d);
+    console.log(c);
+
+
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>04-备忘录模式</title>
+</head>
+<body>
+
+
+<script type="text/html">
+
+    var resultCache = {};
+
+    function xxx(n) {
+
+        var result = resultCache[n];
+        if (result != undefined) {
+            console.log('缓存里面有, 直接取出了结果, 不用再次运算');
+            return result;
+        }
+
+        console.log('需要计算');
+        var result = 0;
+        for (var i = 0; i < n; i++) {
+            for (var j = 0; j < n; j++) {
+                    result += j;
+            }
+        }
+        console.log('计算除了结果, 缓存了起来');
+        resultCache[n] = result;
+        return result;
+    }
+
+    console.log(xxx(5));
+    console.log(xxx(5));
+    console.log(xxx(5));
+    console.log(xxx(5));
+
+
+</script>
+
+
+<script>
+
+    var resultCache = {};
+
+    function xxx(n) {
+
+        if (typeof arguments.callee.resultCache === 'undefined') {
+            arguments.callee.resultCache = {};
+        }
+        var result = arguments.callee.resultCache[n];
+        if (result != undefined) {
+            console.log('缓存里面有, 直接取出了结果, 不用再次运算');
+            return result;
+        }
+
+        console.log('需要计算');
+        var result = 0;
+        for (var i = 0; i < n; i++) {
+            for (var j = 0; j < n; j++) {
+                result += j;
+            }
+        }
+        console.log('计算除了结果, 缓存了起来');
+        arguments.callee.resultCache[n] = result;
+        return result;
+    }
+
+    console.log(xxx(5));
+    console.log(xxx(5));
+    console.log(xxx(5));
+    console.log(xxx(5));
+
+
+</script>
+
+
+</body>
+</html>

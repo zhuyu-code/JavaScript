@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>03-单例设置模式</title>
+</head>
+<body>
+<script type="text/html">
+    function Tool() {}
+
+    var t1 = new Tool();
+    var t2 = new Tool();
+    var t3 = new Tool();
+
+    console.log(t1 === t2);
+    console.log(t1 === t3);
+    console.log(t2 === t3);
+
+</script>
+<!--全局变量-->
+<script type="text/html">
+    var instance = null;
+    function Tool() {
+        // 判断
+        if(instance){
+           return instance;
+        }
+
+        // 指向
+        instance = this;
+        this.name = '撩课学院';
+        this.intro = '喜欢IT, 就上撩课(itlike.com)';
+    }
+
+    // 实例化
+    var t1 = new Tool();
+    var t2 = new Tool();
+    var t3 = new Tool();
+
+    console.log(t1 === t2);
+    console.log(t1 === t3);
+    console.log(t2 === t3);
+</script>
+<!--即时函数-->
+<script type="text/html">
+    (function (w) {
+        var instance = null;
+        function Tool() {
+            // 判断
+            if(instance){
+                return instance;
+            }
+            // 指向
+            instance = this;
+            this.name = '撩课学院';
+            this.intro = '喜欢IT, 就上撩课(itlike.com)';
+        }
+        w.Tool = Tool;
+    })(window);
+
+    var t1 = new Tool();
+    var t2 = new Tool();
+    var t3 = new Tool();
+
+    console.log(t1 === t2);
+    console.log(t1 === t3);
+    console.log(t2 === t3);
+
+    t1.name = 'itlike';
+    console.log(t1);
+    console.log(t2);
+    console.log(t3);
+</script>
+<script type="text/html">
+    (function (w) {
+        function Tool() {
+            // 判断
+            if(Tool.instance){
+                return Tool.instance;
+            }
+            // 指向
+            Tool.instance = this;
+            this.name = '撩课学院';
+            this.intro = '喜欢IT, 就上撩课(itlike.com)';
+        }
+        w.Tool = Tool;
+    })(window);
+
+    var t1 = new Tool();
+    var t2 = new Tool();
+    var t3 = new Tool();
+
+    console.log(t1 === t2);
+    console.log(t1 === t3);
+    console.log(t2 === t3);
+
+    t1.name = 'itlike';
+    console.log(t1);
+    console.log(t2);
+    console.log(t3);
+</script>
+
+<script type="text/html">
+    function Tool() {
+        var instance = this;
+        this.name = '张三';
+        this.age = 18;
+        // 惰性函数
+        Tool = function () {
+            return instance;
+        }
+    }
+
+   /* var t1 = new Tool();
+    var t2 = new Tool();
+    console.log(t1 === t2);*/
+
+
+    var t1 = new Tool();
+    Tool.prototype.run = function () {
+        console.log('跑');
+    };
+    var t2 = new Tool();
+    console.log(t1 === t2);
+
+    // t1.run();
+    t2.run();
+</script>
+
+<script>
+    function Tool() {
+        // 1. 声明
+        var instance = null;
+        var oldPrototype = Tool.prototype; // 保存Tool的原型对象
+        Tool = function () {
+            return instance;
+        };
+        Tool.prototype = oldPrototype;
+        instance = new Tool();
+        // 修正constructor
+        instance.constructor = Tool;
+
+        this.name = '张三';
+        this.age = 18;
+
+        return instance;
+    }
+
+    var t1 = new Tool();
+    Tool.prototype.run = function () {
+        console.log('跑');
+    };
+    var t2 = new Tool();
+    console.log(t1 === t2);
+
+   /* t1.run();
+    t2.run();*/
+
+    console.log(t1.constructor);
+</script>
+
+<script>
+   var n =  function f() {
+
+   };
+
+   n();
+
+
+   (function f(window) {
+        var str = '张三';
+
+       window.str = str;
+   })(window);
+
+   window.str
+</script>
+</body>
+</html>

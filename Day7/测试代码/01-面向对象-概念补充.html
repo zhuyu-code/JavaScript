@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <button id="btn">点我</button>
+<!--进程和线程-->
+<script type="text/html">
+    1. 进程：程序的一次执行, 它占有一片独有的内存空间
+    2. 线程： CPU的基本调度单位, 是程序执行的一个完整流程
+    3. 进程与线程
+        一个进程中一般至少有一个运行的线程: 主线程
+        一个进程中也可以同时运行多个线程, 我们会说程序是多线程运行的
+        一个进程内的数据可以供其中的多个线程直接共享
+        多个进程之间的数据是不能直接共享的
+    4. 浏览器运行是单进程还是多进程?
+        有的是单进程
+        firefox
+        老版IE
+        有的是多进程
+        chrome
+        新版IE
+    5. 如何查看浏览器是否是多进程运行的呢?
+       任务管理器==>进程
+    6. 浏览器运行是单线程还是多线程?
+       都是多线程运行的
+</script>
+<!--JS是单线程-->
+<script type="text/html">
+    var btn = document.getElementById('btn'), timerId = null;
+    btn.onclick = function (ev) {
+        // 0. 清除定时器
+        clearTimeout(timerId);
+        // 1. 获取当前的时间
+        var cTime = Date.now();
+        console.log('------之前-----');
+        // 2. 开启定时器
+        timerId = setTimeout(function () {
+            console.log((Date.now() - cTime) + 'ms后执行');
+        }, 200);
+        console.log('------之后-----');
+
+        // 3. 耗时的任务
+        for(var i = 0; i < 1000000000; i++){
+
+        }
+    }
+</script>
+<!--进一步验证-->
+<!--
+2. 代码划分
+	初始化代码
+	回调代码
+-->
+<script>
+    // 1. 定时器1
+    setTimeout(function () {
+        console.log('------2m');
+    }, 2000);
+    // 2. 定时器2
+    setTimeout(function () {
+        console.log('------1m');
+    }, 1000);
+    // 3. 函数
+    function func() {
+        console.log('--------func()');
+    }
+    func();
+    // 4. 弹窗
+    alert('阻断');
+    // 5. 后续操作
+    console.log('---------弹窗之后操作1-----');
+    console.log('---------弹窗之后操作2-----');
+</script>
+</body>
+</html>

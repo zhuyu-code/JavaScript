@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>五彩小球</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        html, body, #box{
+            width: 100%;
+            height: 100%;
+        }
+
+        #box{
+            background-color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+
+<script src="js/Underscore-min.js"></script>
+<script src="js/Ball.js"></script>
+<script>
+    // 1. 获取标签
+    var box = document.getElementById('box');
+    // 2. 监听鼠标在盒子上的移动
+    // 颜色数组 和 小球数组
+    var colorArr = ['red', 'green', 'blue', 'yellow', 'orange', 'purple', 'pink'];
+    var ballArr = [];
+    box.onmousemove = function (ev1) {
+        var e = ev1 || window.event;
+        // 2.1 创建小球,装入小球数组
+        var ball = new Ball({
+                parentId: 'box',
+                left: e.clientX,
+                top: e.clientY,
+                bgColor:colorArr[_.random(0, colorArr.length - 1)]
+                });
+        ball.render();
+        ballArr.push(ball);
+    };
+
+   // 3. 定时器
+    setInterval(function () {
+        // 清除上一帧产生的小球
+        for(var i=0; i<box.children.length; i++){
+            box.children[i].remove();
+        }
+
+        // 绘制小球和让小球移动
+        for(var j=0; j<ballArr.length; j++){
+            ballArr[j].render();
+            ballArr[j].update();
+        }
+    }, 50);
+
+</script>
+</body>
+</html>

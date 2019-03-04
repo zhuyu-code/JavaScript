@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        li{
+            border: 1px solid #000;
+            background-color: #ccc;
+            cursor: pointer;
+        }
+        
+        .current{
+            background-color: orangered;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li class="current"></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+
+<script>
+   /* window.onload = function () {
+        var allLis = document.getElementsByTagName('li');
+        for(var i=0; i<allLis.length; i++){
+            var li = allLis[i];
+            li.onmouseover = function () {
+                for(var j=0; j<allLis.length; j++){
+                     allLis[j].className = '';
+                }
+                this.className = 'current';
+            }
+        }
+    }*/
+
+
+    window.onload = function () {
+        var allLis = document.getElementsByTagName('li');
+        // 记录移动前选中li对应的索引
+        var preSelectLiIndex = 0;
+        for(var i=0; i<allLis.length; i++){
+            (function (i) {
+                var li = allLis[i];
+                li.onmouseover = function () {
+                    // 清除
+                    allLis[preSelectLiIndex].className = '';
+                    // 设置
+                    this.className = 'current';
+                    // 赋值
+                    preSelectLiIndex = i;
+                }
+            })(i);
+        }
+    }
+</script>
+</body>
+</html>

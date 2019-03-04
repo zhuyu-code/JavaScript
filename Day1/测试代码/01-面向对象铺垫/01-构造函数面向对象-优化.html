@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    function Dog(name, age, dogFriends) {
+        // 属性
+        this.name = name;
+        this.age = age;
+        this.dogFriends = dogFriends;
+
+        // 方法
+        this.eat = function (someThing) {
+            console.log(this.name + '吃' + someThing);
+        };
+
+        this.run = function (someWhere) {
+            console.log(this.name + '跑' + someWhere);
+        }
+    }
+
+    // 产生狗对象
+    var smallDog = new Dog('小花', 1);
+    console.log(smallDog.name, smallDog.age);
+    smallDog.eat('奶');
+    smallDog.run('家里');
+
+    var bigDog = new Dog('大花', 10, ['大大', '小小']);
+    console.log(bigDog.name, bigDog.dogFriends);
+    bigDog.eat('五花肉');
+    bigDog.run('天河公园');
+
+</script>
+</body>
+</html>

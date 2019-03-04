@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>03-面向对象-扩展-私有变量和函数</title>
+</head>
+<body>
+
+<!--
+什么叫私有变量和函数?
+私有, 是指一种访问权限; 这种权限,可以理解为, 是一个对象自己特有的, 任何别的对象都无法访问, 外界也无法访问
+-->
+<script type="text/html">
+
+    function Caculator() {
+        this.result = 0
+        this.jia = function (num) {
+            this.result += num;
+            return this;
+        }
+        this.jian = function (num) {
+            this.result -= num;
+            return this;
+        }
+        this.logResult = function () {
+            console.log(this.result);
+            return this;
+        }
+        this.cleanResult = function () {
+            this.result = 0;
+            return this;
+        }
+    }
+
+    var c = new Caculator();
+    c.jia(2).jia(3).jian(1)
+
+    // 可能被外界随意修改
+    c.result = 1;
+    c.logResult();
+</script>
+
+<!--
+以上代码最严重的问题, 就是外界可以, 直接访问到result属性, 可能会被修改
+-->
+<script>
+
+    function Caculator() {
+        // 这里声明的变量, 外界无法访问, 也无法修改, 所以称其为, 私有属性
+        var result = 0;
+        // 私有函数, 只是提供给内部使用
+        function checkNum(num) {
+            var isNum = typeof num === 'number';
+            if (!isNum) {
+                alert('输入有误, 请重新输入数值');
+            }
+            return isNum;
+        }
+
+        // 能访问到私有变量和函数的方法称之为, "特权方法"
+        this.jia = function (num) {
+            if (checkNum(num)) {
+                result += num;
+            }
+            return this;
+        };
+
+        this.jian = function (num) {
+            if (checkNum(num)) {
+                result -= num;
+            }
+            return this;
+        };
+
+        this.logResult = function () {
+            console.log(result);
+            return this;
+        };
+
+        this.cleanResult = function () {
+            result = 0;
+            return this;
+        }
+    }
+
+    var c = new Caculator();
+    c.jia(2).jia('a').jian(1);
+    c.logResult();
+    c.cleanResult();
+    c.jia(2).jian(1).logResult();
+
+</script>
+
+
+</body>
+</html>

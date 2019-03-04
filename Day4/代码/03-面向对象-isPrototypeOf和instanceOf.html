@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>03-面向对象-isPrototypeOf和instanceOf</title>
+</head>
+<body>
+
+<!--isPrototypeOf-->
+<script type="text/html">
+    function Person() {}
+    // Person.prototype
+
+    var p = new Person();
+    console.log(Person.prototype.isPrototypeOf(p)); // true
+    console.log(p.__proto__.isPrototypeOf(p));  // true
+
+    // 对象
+    /*
+    var obj = {
+        'name': '撩课'
+    };
+    Person.prototype = obj;
+
+    console.log(Person.prototype.isPrototypeOf(p)); // false
+    */
+
+
+    var obj = {
+        'name': '撩课'
+    };
+    Person.prototype = obj;
+
+    var p2 = new Person();
+    console.log(Person.prototype.isPrototypeOf(p2));
+
+</script>
+
+<!--instanceOf-->
+<script>
+    function Person() {}
+
+    var p = new Person();
+    console.log(p instanceof Person); // true
+
+    var obj = {
+        name: '撩课'
+    };
+    Person.prototype = obj;
+
+    var p2 = new Person();
+    console.log(p2 instanceof Person);
+    console.log(p2);
+</script>
+</body>
+</html>

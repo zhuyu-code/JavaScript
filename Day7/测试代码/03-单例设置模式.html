@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<!--
+特点:在整个程序的运行过程中一个类型只有一个实例对象.
+	通过指定的构造函数, 无论创建多少次对象, 都只有一个
+-->
+
+<!--最终效果-->
+<script type="text/html">
+    function Tool() {}
+    var t1 = new Tool();
+    var t2 = new Tool();
+    var t3 = new Tool();
+    console.log(t1 === t2);
+    console.log(t1 === t3);
+</script>
+
+<!--全局变量-->
+<script type="text/html">
+    var instance = null;
+    function Tool() {
+    // 1. 判断
+    if (instance) {
+    return instance;
+    }
+    // 2. 指向
+    instance = this;
+    this.name = '撩课学院';
+    this.intro = '喜欢IT, 就上撩课(itlike.com)';
+    }
+
+    // 3. 实例化
+    var t1 = new Tool();
+    var t2 = new Tool();
+    var t3 = new Tool();
+    console.log(t1 === t2);
+    console.log(t3 === t2);
+</script>
+
+<!--优化: 即时函数-->
+<script type="text/html">
+    (function () {
+        var instance = null;
+        function Tool() {
+            // 1. 判断
+            if (instance) {
+                return instance;
+            }
+            // 2. 指向
+            instance = this;
+            this.name = '撩课学院';
+            this.intro = '喜欢IT, 就上撩课(itlike.com)';
+        }
+        window.Tool = Tool;
+    })(window);
+
+    var t1 = new Tool();
+    var t2 = new Tool();
+    var t3 = new Tool();
+    console.log(t1 === t2);
+    console.log(t1 === t3);
+    t1.name = 'itlike';
+    console.log(t1);
+    console.log(t2);
+    console.log(t3);
+</script>
+
+<!--其它写法-->
+<script type="text/html">
+    (function () {
+        function Tool() {
+            if (Tool.instance) {
+                return Tool.instance;
+            }
+            Tool.instance = this;
+            this.name = '撩课学院';
+            this.intro = '喜欢IT, 就上撩课(itlike.com)';
+        }
+        window.Tool = Tool;
+    })(window);
+
+    var t1 = new Tool();
+    var t2 = new Tool();
+    console.log(t1 === t2);
+</script>
+
+<!--惰性函数单例-->
+<script type="text/html">
+    function Tool() {
+        var instance = this;
+        this.name = '张三';
+        this.age = 18;
+        // 惰性函数, 函数只会在第一次被执行, 后面直接调用
+        Tool = function () {
+            return instance;
+        };
+    }
+
+    /*var t1 = new Tool();
+    var t2 = new Tool();
+    console.log(t1 === t2);*/
+
+
+    var t1 = new Tool();
+    Tool.prototype.run = function () {
+        console.log('跑');
+    };
+    var t2 = new Tool();
+    console.log(t1 === t2);
+    t2.run();
+</script>
+<script>
+    function Tool() {
+        // 1. 声明
+        var instance = null;
+        var oldPrototype = Tool.prototype; // 保存Tool的原型对象
+        Tool = function () {
+            return instance;
+        };
+        Tool.prototype = oldPrototype;
+        instance = new Tool();
+
+        // 修正constructor
+        instance.constructor = Tool;
+
+        instance.name = '张三';
+        instance.age = 18;
+
+        return instance;
+    }
+
+    Tool.prototype.run = function () {
+        console.log('跑');
+    };
+
+    var t1 = new Tool();
+    Tool.prototype.desc = 'xxx';
+
+    var t2 = new Tool();
+    var t3 = new Tool();
+    var t4 = new Tool();
+
+    console.log(t1 === t2);
+    console.log(t3 === t4);
+    console.log(t3 === t1);
+
+    console.log(t1.desc);
+    console.log(t2.desc);
+    console.log(t3.desc);
+
+    console.log(t1.constructor);
+</script>
+</body>
+</html>

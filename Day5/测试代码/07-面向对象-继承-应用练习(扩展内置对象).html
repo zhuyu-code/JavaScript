@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>13-面向对象-继承-应用练习(扩展内置对象)</title>
+</head>
+<body>
+
+<!--
+给数组实例, 增加一个run
+-->
+<script type="text/html">
+
+    var arr = [1,2,3];
+    arr.run = function () {
+        console.log('跑');
+    }
+    arr.run();
+
+
+    var arr2 = [2];
+    arr.run = function () {
+        console.log('跑');
+    }
+
+</script>
+
+<!--
+可以直接添加到原型对象上面
+-->
+<script>
+
+    Array.prototype.run = function () {
+        console.log('跑');
+    };
+
+    var arr = [1,2,3];
+    arr.run();
+
+
+    var arr2 = [2];
+    arr2.run();
+
+</script>
+
+<!--
+很容易, 覆盖调 内置对象, 原本的方法
+-->
+
+<script>
+
+    function MyArray() {}
+
+    // MyArray.prototype = Array.prototype;
+    MyArray.prototype = new Array();
+    MyArray.prototype.run = function () {
+        console.log('跑');
+    };
+    var arr2 = new MyArray();
+    arr2.run();
+</script>
+
+
+</body>
+</html>

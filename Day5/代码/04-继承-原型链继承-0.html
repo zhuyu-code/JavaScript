@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    /**
+     * 构造函数Person
+     * @constructor
+     */
+    function Person(name, pets) {
+       this.name = name;
+       this.pets = pets;
+    }
+
+    Person.prototype.run = function () {
+        console.log('跑');
+    };
+
+
+    /**
+     * 构造函数Student
+     * @constructor
+     */
+    function Student(num, name, pets) {
+        // 注意: 一定要放在最前面
+        Person.call(this, name, pets);
+        this.num = num;
+    }
+
+    // 1. 构造父类的实例
+    var p = new Person();
+    // 2. 并设置为子类的原型对象
+    Student.prototype = p;
+    // 3.修复constructor指针即可
+    Student.prototype.constructor = Student;
+</script>
+<script>
+    var stu = new Student('001', '张三', ['小花']);
+    var stu2 = new Student('002', '李四', ['小茂']);
+    console.log(stu);
+    console.log(stu2);
+</script>
+</body>
+</html>
